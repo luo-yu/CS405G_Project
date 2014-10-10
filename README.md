@@ -5,12 +5,6 @@ This is a database course project
 
 <strong>Team member: Miles, Yu</strong>
 
-The project description: 
-
-CS405G Fall 2014 Project
-Assigned:        Oct 10th
-Due:                Dec 1st            
- 
  
 <h4>Objectives</h4>
 The aim of this project is to implement an e-commerce database application. You are responsible for client-side web applications and setting up the server-side database. Let’s assume that you have been hired to set up an online gift store. The company sells two types of products: toys and games. (You are welcome to take on other applications of interest. A one-on-one meeting between me and your team is needed in order to discuss your chosen application)
@@ -23,9 +17,11 @@ Your goal is to create an online store for the gift store. There will be three t
 <li>staff</li>
 <li>manager</li>
 </ul>
-Customers They are allowed to query items in the stores at all times. But in order to purchase from the store, customers must first register. The items are first placed in a shopping basket, and then ordered. Customers can see the status of orders (i.e., pending or shipped) as part of the shopping history.
-Staff can check inventory, re-stock the online store with more items, view all customer orders, and ship orders to customers. A staff member has an on-line ID and a password that he/she can use to login into the company’s website to perform the previous listed tasks
-Manager can do all tasks a staff member can do. In addition, manager can (1) view statistics about sale information (in the previous week, month, or year), and (2) decide sales promotions. Manager needs to login into the company’s website to perform the tasks.
+
+<ul>
+<li><strong>Customers</strong> They are allowed to query items in the stores at all times. But in order to purchase from the store, customers must first register. The items are first placed in a shopping basket, and then ordered. Customers can see the status of orders (i.e., pending or shipped) as part of the shopping history.</li>
+<li><strong>Staff</strong> can check inventory, re-stock the online store with more items, view all customer orders, and ship orders to customers. A staff member has an on-line ID and a password that he/she can use to login into the company’s website to perform the previous listed tasks</li>
+<li><strong>Manager</strong> can do all tasks a staff member can do. In addition, manager can (1) view statistics about sale information (in the previous week, month, or year), and (2) decide sales promotions. Manager needs to login into the company’s website to perform the tasks.</li></ul>
  
 Your project must include the following functionality:
  
