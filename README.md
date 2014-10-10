@@ -18,9 +18,9 @@ The aim of this project is to implement an e-commerce database application. You 
 <h4>Software Requirements</h4>
  
 Your goal is to create an online store for the gift store. There will be three types of users:
-<li>• customers</li>
-<li>• staff</li>
-<li>• manager</li>
+<li>• customers</li><\n>
+<li>• staff</li><\n>
+<li>• manager</li><\n>
  
 Customers They are allowed to query items in the stores at all times. But in order to purchase from the store, customers must first register. The items are first placed in a shopping basket, and then ordered. Customers can see the status of orders (i.e., pending or shipped) as part of the shopping history.
 Staff can check inventory, re-stock the online store with more items, view all customer orders, and ship orders to customers. A staff member has an on-line ID and a password that he/she can use to login into the company’s website to perform the previous listed tasks
