@@ -3,7 +3,7 @@ CS405G_Project
 
 This is a database course project
 
-Team member: Miles, Yu
+<em>Team member: Miles, Yu</em>
 
 The project description: 
 
