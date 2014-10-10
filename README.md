@@ -18,9 +18,9 @@ The aim of this project is to implement an e-commerce database application. You 
 <h4>Software Requirements</h4>
  
 Your goal is to create an online store for the gift store. There will be three types of users:
-• customers
-• staff
-• manager
+<li>• customers</li>
+<li>• staff</li>
+<li>• manager</li>
  
 Customers They are allowed to query items in the stores at all times. But in order to purchase from the store, customers must first register. The items are first placed in a shopping basket, and then ordered. Customers can see the status of orders (i.e., pending or shipped) as part of the shopping history.
 Staff can check inventory, re-stock the online store with more items, view all customer orders, and ship orders to customers. A staff member has an on-line ID and a password that he/she can use to login into the company’s website to perform the previous listed tasks
@@ -60,30 +60,4 @@ Write down your assumptions or constraints and draw a complete ER diagram includ
            
 A product recommendation system that utilizes the customer’s browsing and purchasing history to recommend relevant items during the browsing process.
  
- 
- 
-Due Oct 24th 
-1.       Please convert the software requirement into database requirement.
-2.       Please draw the corresponding ER diagram.
-3.       Please outline the database schema design (table names and uses, field names, data types) with sound design principle applied.
- 
-Due Dec 1st
-     Project presentation           
- 
-Due Dec 1st      
- 
-Submit the code and the executables and a printed report in the following format for each group:
-1.      Finalized database design
-a.       Detailed ER diagram.
-b.      Detailed database schema design.
-c.       Explanation of functional dependencies and the highest degree of form.
-2.      Description of programs (data structures, algorithms, and filenames)
-a.       Program flow
-b.      Data structures
-c.       Algorithms if there is any
-3.      Program functions:
-a.       Sample input and output screens for each function
-4.      Testing
-a.       Explain what you have tested to make sure your software works correctly.
-b.      Describe your project experience.
  
