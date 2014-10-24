@@ -20,6 +20,19 @@
         <p id="HeaderText   ">Checkout</p>
 
     </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<form method="post" action="toSQL.php">
+    Name: <input type="text" name="username">
+    ID: <input type="text" name="id">
+    <input type="submit" value="click" name="submit"> 
+</form>
+<br>
 </body>
 </html>
 
