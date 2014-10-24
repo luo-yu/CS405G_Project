@@ -22,3 +22,50 @@
     </div>
 </body>
 </html>
+
+
+
+
+
+
+<?php
+// Create connection
+$link = mysqli_connect('127.0.0.1','subroot','password','sqltest');
+// Check connection
+if (!$link) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+echo "Connected successfully to our toy database <br>";
+
+
+
+
+
+
+if (mysqli_query($link, "CREATE TEMPORARY TABLE myToys LIKE toys") === TRUE) {
+    printf("Temporary table toys successfully created.<br>");
+}
+
+
+
+$namesOfToys = mysqli_query($link, "SELECT name FROM toys");
+
+echo "The toy names in our toys table are: <br>";
+while($row = mysqli_fetch_array($namesOfToys)) {
+  echo $row['name'];
+  echo "<br>";
+}
+
+
+$toyIds = mysqli_query($link, "SELECT id FROM toys");
+
+echo "The toy ids in our toys table are: <br>";
+while($row = mysqli_fetch_array($toyIds)) {
+  echo $row['id'];
+  echo "<br>";
+}
+
+
+
+mysqli_close($link);
+?>
