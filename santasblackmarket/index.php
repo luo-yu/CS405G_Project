@@ -42,6 +42,14 @@
 	This is content area
 	</div>
 	<!--content wrapper ends-->
+	
+	
+	<!--footer starts-->
+	<div id="footer">
+	
+		<h2 style="text-align:center: padding-top: 30px;">&copy; 2014 by Miles and Yu</h2>
+	</div>
+	<!--Footer ends-->
 
 </div>
 <!--Main container ends here -->

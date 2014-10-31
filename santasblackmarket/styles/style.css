@@ -44,7 +44,7 @@ margin:  auto;
 
 .menubar{
 width: 1000px;
-height: 50px;
+height: 40px;
 background: gray;
 color: white;
 
@@ -67,6 +67,12 @@ padding: 8px;
 margin: 5px;
 font-size: 18px;
 font-family: COMIC SANS MS;
+}
+
+#menu a:hover{
+color: orange;
+font-weight: bolder;
+text-decoration:underline;
 }
 
 #logo{
