@@ -1,5 +1,5 @@
 <?php
 	//redirect to the logged-in homepage for logged in users
-	header("Location: /SantasBlackMarket/users.php");
+	header("Location: /SantasBlackMarket/pages/users.php");
 	exit();
 ?>

@@ -39,7 +39,10 @@
 	
 	<!--content wrapper starts-->
 	<div class="content_wrapper">
-	This is content area
+	Hello Administrator
+	<br>
+	<br>
+	<a href="../admin_area/insert_item.php">Add Item</a>
 	</div>
 	<!--content wrapper ends-->
 

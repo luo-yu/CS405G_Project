@@ -32,6 +32,8 @@
 			<li><a href="#">My Account</a></li>
 			<li><a href="#">Sign Up</a></li>
 			<li><a href="#">Shopping Cart</a></li>
+			<li><a href="../SantasBlackMarket/pages/loginScreen.php">Log-In</a></li>
+			<li><a href="../SantasBlackMarket/pages/registerScreen.php">Register</a></li>
 		</ul>
 	
 	</div>
@@ -42,14 +44,6 @@
 	This is content area
 	</div>
 	<!--content wrapper ends-->
-	
-	
-	<!--footer starts-->
-	<div id="footer">
-	
-		<h2 style="text-align:center: padding-top: 30px;">&copy; 2014 by Miles and Yu</h2>
-	</div>
-	<!--Footer ends-->
 
 </div>
 <!--Main container ends here -->
