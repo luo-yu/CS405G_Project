@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <title>Santa's Black Market - Home</title>
 
-<link rel="stylesheet" href="styles/style.css" media ="all" />
+<link rel="stylesheet" href="../styles/style.css" media ="all" />
 </head>
 
 <body>
@@ -16,7 +16,7 @@
 <div class="main_wrapper">
 	<!--Header starts here-->
 	<div class="header_wrapper">
-		<img id="logo" src="images/logo.jpg" />
+		<img id="logo" src="../images/logo.jpg" />
 	
 	</div>
 	<!--Header ends here-->
@@ -39,7 +39,25 @@
 	
 	<!--content wrapper starts-->
 	<div class="content_wrapper">
-	This is content area
+	
+	<form method="post" action="..\functions\login.php">
+   	 Email:     
+    	<br>
+   	 <input type="text" name="username">
+   	 <br>
+   	 Password:     
+   	 <br>
+    	<input type="text" name="password">
+    	<br>
+    	<input type="submit" value="Log In" name="submit"> 
+	</form>
+
+
+
+
+
+
+
 	</div>
 	<!--content wrapper ends-->
 

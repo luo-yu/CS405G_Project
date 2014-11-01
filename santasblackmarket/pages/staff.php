@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <title>Santa's Black Market - Home</title>
 
-<link rel="stylesheet" href="styles/style.css" media ="all" />
+<link rel="stylesheet" href="../styles/style.css" media ="all" />
 </head>
 
 <body>
@@ -16,7 +16,7 @@
 <div class="main_wrapper">
 	<!--Header starts here-->
 	<div class="header_wrapper">
-		<img id="logo" src="images/logo.jpg" />
+		<img id="logo" src="../images/logo.jpg" />
 	
 	</div>
 	<!--Header ends here-->
