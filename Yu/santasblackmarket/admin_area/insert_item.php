@@ -1,11 +1,10 @@
-
+<!--This page is used by admin to insert items into the database-->
 <!DOCTYPE html>
 
 
 <?php
-
+//connect to database
 include ("includes/db.php");
-
 ?>
 
 <html lang="en">

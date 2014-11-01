@@ -5,8 +5,20 @@
 
 $con=mysqli_connect("localhost","yu","","santasblackmarket");
 
+
+//mysqli connection error check, if the database is not connected,
+// an error message will be generated
+if(mysqli_connect_error()){
+	echo "The connection was not established: " . mysqli_connect_error();
+}
+
+
+
 /*Function to get the items*/
 function getItem(){
+	
+
+
 	global $con;
 	
 	$get_pro="
@@ -30,10 +42,12 @@ function getItem(){
 					
 					<img src='admin_area/item_images/$item_image' width ='180' height ='180' />
 					
-					<p><b> $$item_price </b></p>
+					<p><b> Price: $$item_price </b></p>
 					
-					<a href='details.php' style ='float:left;'>Details</a>
-					<a href='index.php'><button style='float:right'/>Add to Cart</a>
+					<a href='details.php?pro_id=$item_id' style ='float:left;'>Details</a>
+					
+					
+					<a href='index.php?pro_id=$item_id'><button style='float:right'/>Add to Cart</a>
 			
 			</div>
 		

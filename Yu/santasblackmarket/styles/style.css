@@ -50,6 +50,8 @@ color: white;
 
 }
 
+
+
 #menu{
 padding: 0;
 marging: 0;
@@ -88,18 +90,40 @@ margin-bottom: 10px;
 
 #single_item{
 		float: left;
-		margin-left: 0px;
+		margin-left: 30px;
 		padding: 10px;
 	}
 	#singl_item img{
 		border: 2px solid black;
 	}
 
+	#shopping_cart{
+		width: 800px;
+		height: 50px;
+		background: black;
+		color: white;
+	}
+	
 .content_wrapper{
 width: 1000px;
 height: 800px;
 margin: auto;
 background: pink;
+
+}
+
+#sidebar{
+width:200px;
+height: 800px;
+background: black;
+float: left;
+}
+
+#footer{
+width:1000px;
+height: 100px;
+background: gray;
+clear: both;
 
 }
 
