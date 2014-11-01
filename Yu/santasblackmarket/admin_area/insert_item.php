@@ -21,8 +21,6 @@ include ("includes/db.php");
 <body bgcolor="#00CED1">
 
 
-
-
 	<form action="insert_item.php" method="post" enctype="multipart/form-data">
 	
 		<table align="center" width="750" border="2" bgcolor="FFCCFF">
@@ -40,8 +38,13 @@ include ("includes/db.php");
 			
 			<tr>
 				<td align="right"><b>Category: </b> </td>
+				<td><select name="item_category">
+					<option value="">- Select -</option>
+					<option value="Toys">Toys</option>
+					<option value="Games">Games</option>
+				</select></td>
 				
-				<td><input type="text" name="item_category" size ="60" required/></td>
+				
 
 			</tr>
 			

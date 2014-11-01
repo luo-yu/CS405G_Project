@@ -1,6 +1,14 @@
 
 
 <!DOCTYPE html>
+
+
+<?php
+
+include ("functions/functions.php");
+
+?>
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -39,7 +47,10 @@
 	
 	<!--content wrapper starts-->
 	<div class="content_wrapper">
-	This is content area
+		<div id="item_box">
+		
+			<?php getItem(); ?>
+		</div>
 	</div>
 	<!--content wrapper ends-->
 	
