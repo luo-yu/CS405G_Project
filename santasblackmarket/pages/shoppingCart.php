@@ -12,7 +12,7 @@
 
 
 <?php 
-include "staffSecurity.php";
+include "security.php";
 ?>
 
 <!--Main container starts here -->
