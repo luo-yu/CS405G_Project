@@ -10,9 +10,7 @@
 
 <body>
 
-<?php 
-include "staffSecurity.php";
-?>
+
 
 
 <!--Main container starts here -->
@@ -20,29 +18,20 @@ include "staffSecurity.php";
 	<!--Header starts here-->
 	<div class="header_wrapper">
 		<img id="logo" src="../images/logo.jpg" />
-	
 	</div>
 	<!--Header ends here-->
 	
 	
+	 
 	<!--Navigation starts-->
 	<div class="menubar">
 	
 		<ul id="menu">
-		
-		<ul id="menu">
-		<!--
-			<li><a href="../functions/redirect.php?link=users">Home</a></li>
-			<li><a href="../functions/redirect.php?link=userpdt">All Products</a></li>
-			<li><a href="../functions/redirect.php?link=acct" >My Account</a></li>
-			<li><a href="../functions/redirect.php?link=cart" >Shopping Cart</a></li>
-			-->
-			
-			<li><a href="../functions/redirect.php?link=inv" >Check Inventory</a></li>
-			<li><a href="../functions/redirect.php?link=order" >Check Orders</a></li>
-			<li><a href="../index.php">Log-Out</a></li>
+			<li><a href="../index.php">Home</a></li>
+			<li><a href="../functions/redirect.php?link=allpdctg">All Products</a></li>
+			<li><a href="../pages/registerScreen.php">Register</a></li>
+			<li><a href="../pages/loginScreen.php">Log-In</a></li>
 		</ul>
-	
 	
 	</div>
 	<!--Navigation starts-->

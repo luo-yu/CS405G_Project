@@ -1,5 +1,6 @@
-<?php
 
+<?php
+session_start();
 $email = $_POST["username"];
 $password = $_POST["password"];
 
@@ -9,6 +10,7 @@ if($email&&$password){
 
 //if so, connect
 include 'sqlConnect.php';
+
 
 //query their email/username
 $query = mysqli_query($link, "SELECT * FROM user WHERE 
@@ -33,24 +35,28 @@ if ($numrows!=0)
 
 		//if admin, then redirect to admin home screen:
 		if((int)$row['user_level'] == 2){
-		//include redirectAdminIndex.php;	//can use this instead of below for possible future mvc design
-		header('Refresh: 2; URL=http://localhost/SantasBlackMarket/pages/admin.php');
-		echo "Log in successful. Redirecting...";
+		
+		$_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
+		$_SESSION['type'] = 'manager';
+		header('Refresh: 2; URL=http://localhost/SantasBlackMarket/pages/manager.php');
+		//header("location: /SantasBlackMarket/pages/manager.php");
+		echo "Manager log in successful. Redirecting...";
 		}
 		
 		//if staff, then redirect to staff home screen:
 		if( (int)$row['user_level'] == 1){
-		//include redirectStaffIndex.php;	//can use this instead of below for possible future mvc design
-		header('Refresh: 2; URL=http://localhost/SantasBlackMarket/pages/staff.php');
+		$_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
+		$_SESSION['type'] = 'staff';
+		//header('Refresh: 2; URL=http://localhost/SantasBlackMarket/pages/staff.php');
+		header("location: /SantasBlackMarket/pages/staff.php");
 		echo "Log in successful. Redirecting...";
 		}	
 		
-		
 		//if user, then redirect to users home screen:
 		if((int)$row['user_level'] === 0){
-		//include redirectUsersIndex.php;	//can use this instead of below for possible future mvc design
-		header('Refresh: 2; URL=http://localhost/SantasBlackMarket/pages/users.php');
-		echo "Log in successful. Redirecting...";
+		$_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
+		header("location: /SantasBlackMarket/pages/users.php");
+		exit();
 		}
 	}
 	//user in our system, but entered in wrong password:
@@ -61,23 +67,9 @@ if ($numrows!=0)
 } 
 //otherwise there was no user with the specified log in info, or the user entered his email name incorrectly
 else{
-
-	
 	header("Location: ../pages/error.php");
 	exit();
-	/*
-	echo "LOG IN FAILED";
-	echo "<br>";
-	
-	echo "You have entered an incorrect email, or you are not yet a registered customer."
-	echo "<br>";
-	
-	//echo "If you have not yet registered, please 
-	
-	//you entered email incorrectly, try again? = login
-	
-	//you are in in the system, therefore register
-	*/
+
 	
 	
 

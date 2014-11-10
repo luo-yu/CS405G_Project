@@ -8,6 +8,12 @@
 </head>
 
 <body bgcolor="#00CED1">
+
+<?php 
+include "staffSecurity.php";
+?>
+
+
 	<form action="insert_item.php" method="post" enctype="multipart/form-data">
 		<table align="center" width="750" border="2" bgcolor="FFCCFF">
 			

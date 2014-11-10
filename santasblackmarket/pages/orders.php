@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +9,10 @@
 </head>
 
 <body>
+
+<?php 
+include "staffSecurity.php";
+?>
 
 
 <!--Main container starts here -->
@@ -27,22 +30,26 @@
 	
 		<ul id="menu">
 		
-			<li><a href="#">Home</a></li>
-			<li><a href="#">All Products</a></li>
-			<li><a href="#">My Account</a></li>
-			<li><a href="#">Sign Up</a></li>
-			<li><a href="#">Shopping Cart</a></li>
+		<ul id="menu">
+		<!--
+			<li><a href="../functions/redirect.php?link=users">Home</a></li>
+			<li><a href="../functions/redirect.php?link=userpdt">All Products</a></li>
+			<li><a href="../functions/redirect.php?link=acct" >My Account</a></li>
+			<li><a href="../functions/redirect.php?link=cart" >Shopping Cart</a></li>
+			-->
+			
+			<li><a href="../functions/redirect.php?link=inv" >Check Inventory</a></li>
+			<li><a href="../functions/redirect.php?link=order" >Check Orders</a></li>
+			<li><a href="../index.php">Log-Out</a></li>
 		</ul>
+	
 	
 	</div>
 	<!--Navigation starts-->
 	
 	<!--content wrapper starts-->
 	<div class="content_wrapper">
-	Hello Administrator
-	<br>
-	<br>
-	<a href="../admin_area/insert_item.php">Add Item</a>
+	This is content area
 	</div>
 	<!--content wrapper ends-->
 

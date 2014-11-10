@@ -49,7 +49,9 @@ include "staffSecurity.php";
 	
 	<!--content wrapper starts-->
 	<div class="content_wrapper">
-	This is content area
+	Staff Options:
+	<br>
+	<a href="insert_item.php">Add Item</a>
 	</div>
 	<!--content wrapper ends-->
 

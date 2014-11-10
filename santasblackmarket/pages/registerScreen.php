@@ -26,12 +26,10 @@
 	<div class="menubar">
 	
 		<ul id="menu">
-		
-			<li><a href="#">Home</a></li>
-			<li><a href="#">All Products</a></li>
-			<li><a href="#">My Account</a></li>
-			<li><a href="#">Sign Up</a></li>
-			<li><a href="#">Shopping Cart</a></li>
+			<li><a href="../index.php">Home</a></li>
+			<li><a href="../functions/redirect.php?link=allpdctg">All Products</a></li>
+			<li><a href="../pages/registerScreen.php">Register</a></li>
+			<li><a href="../pages/loginScreen.php">Log-In</a></li>
 		</ul>
 	
 	</div>
