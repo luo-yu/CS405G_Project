@@ -41,7 +41,7 @@
 		<br/>
 		
 		<b>Please enter your information.</b><br/><br/>
-		<form action="login.php" method="POST">
+		<form action="./includes/loginFunction.php" method="POST">
 			<p>
 				<label>Email: </label>
 				<input type="text" name="data[email]" />

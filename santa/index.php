@@ -1,3 +1,4 @@
+<?php require_once("../includes/db_connection.php"); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -23,7 +24,7 @@
 		<ul class="topmenu">
 		<li><a href="index.php">Home</a></li>
 		<li><a href="products.php">Products</a></li>
-		
+		<li><a href="insert_item.php">Insert </a></li>		
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>
