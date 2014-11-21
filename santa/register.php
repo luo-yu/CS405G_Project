@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
-<!-- this file has the overall look and feel of the website -->
 <html>
 <head>
-<title>Santa's Black Market | Login</title>
+<title>Santa's Black Market| Addmember</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name ="description" content ="Sweets Complete">
 <meta name="keywords" content="">
@@ -19,14 +18,13 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="login.php" class="active" >Login</a> |<a href="members.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="login.php" >Login</a> |<a href="members.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
 			</b>
 			<br />
 			Welcome Guest		</div>
 		<ul class="topmenu">
 		<li><a href="index.php">Home</a></li>
 		<li><a href="products.php">Products</a></li>
-		
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>
@@ -37,35 +35,46 @@
 	<br/>
 	<div class="product-list">
 		
-		<h2>Login</h2>
+		
+
+
+		
+		<h2>Sign Up</h2>
 		<br/>
 		
 		<b>Please enter your information.</b><br/><br/>
-		<form action="./includes/login.php" method="POST">
+	
+	<form method="post" action="./includes/register.php">
+			<p>
+				<label>Name: </label>
+				<input type="text" name="name" />
+			<p>
+			
 			<p>
 				<label>Email: </label>
-				<input type="text" name="username" />
+				<input type="text" name="email" />
 			<p>
 			<p>
 				<label>Password: </label>
-				<input type="password" name="password" />
+				<input type="text" name="password" />
 			<p>
+			
 			<p>
 				<input type="reset" name="data[clear]" value="Clear" class="button"/>
-				<input type="submit" name="submit" value="Log In" class="button marL10"/>
+				<input type="submit" name="submit" value="Register" class="button marL10"/>
 			<p>
 		</form>
+		
 	</div><!-- product-list -->
 </div>
 	
 	</div><!-- maincontent -->
 
 	<div id="footer">
-	
+		
 	</div><!-- footer -->
 	
 </div><!-- wrapper -->
 
 </body>
 </html>
-

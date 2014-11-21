@@ -114,7 +114,7 @@
 		</tr>
 			</table>
 	<br/>
-	<a href="addmember.php" class="abutton">&nbsp;&nbsp;&nbsp;Member Sign Up&nbsp;&nbsp;&nbsp;</a>
+	<a href="register.php" class="abutton">&nbsp;&nbsp;&nbsp;Member Sign Up&nbsp;&nbsp;&nbsp;</a>
 
 </div>
 <br class="clear-all"/>
