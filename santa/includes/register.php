@@ -27,12 +27,12 @@ VALUES ('$safe_name', '$safe_email', '$safe_password')";
 
 //redirect if failure for some reason
 if (!mysqli_query($connection,$sql)){
-    header("Refresh: 3; URL=http://www.cs.uky.edu/~ylu236/santas_black_market/pages/registerScreen.php");
+    header("Refresh: 3; URL=http://www.cs.uky.edu/~ylu236/santa/register.php");
 	echo "Registration FAILED.  Please choose different registration information.  Redirecting...";
 }
 //otherwise it was a successful registration, redirect to users homepage
 else{
-	header("Refresh: 3; URL=http://www.cs.uky.edu/~ylu236/santas_black_market/pages/users.php");
+	header("Refresh: 3; URL=http://www.cs.uky.edu/~ylu236/santa/members.php");
 	echo "Registration successful. Redirecting...";
 }
 
@@ -40,7 +40,7 @@ else{
 //user did not enter info into all fields for our user table
 
 else{
-   header("Refresh: 3; URL=http://www.cs.uky.edu/~ylu236/santas_black_market/pages/registerScreen.php");
+   header("Refresh: 3; URL=http://www.cs.uky.edu/~ylu236/santa/register.php");
 	echo "Registration FAILED.  Please enter ALL registration information.  Redirecting...";
 }
 

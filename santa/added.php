@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -35,34 +36,39 @@
 		
 	<div class="content">	
 	<br/>
-	<div class="product-list">
-		<h2>Product Details</h2>
-		<br/>
-		<div class="images">
-			<a href="#">
-				<img src="images/430_3150132.scale_20.JPG" alt=" Chocolate Angelfood Cupcakes" width="350" />
-			</a>
-		</div>
-		<div class="details">
-			<h3>SKU:  C3000</h3><br/>
-			<h1 class="name"><b> Bird</b></h1><br/>
-			<p class="desc">This is a bird
-			</p>
-			<br/>
-			<p class="view"><b>Price: $0.30</b></p><br/>
-			<form action="purchase.php" method="POST" name="to_cart">
-			<p class="view">
-				<label>Qty:</label> <input type="text" value="1" name="qty" class="s0" size="2" />
-				<input type="submit" name="purchase" value="Buy this item" class="button"/>
-				<input type="hidden" name="price" value="0.30" />
-				<input type="hidden" name="productID" value="3" />
-			</p>
-			
-			</form>
-			<br />
-			<b>Added to the cart, thanks!</b>
-		</div>
-	</div><!-- product-list -->
+
+<?php
+//This pro_id is coming from the products.php or member_products.php, where
+//there is a line of code added.php?pro_id=$item_id
+if ( isset( $_GET['pro_id'] ) ) $id = $_GET['pro_id'] ; 
+// Connect to the database
+require ( '../includes/db_connection.php' ) ;
+
+$q = "SELECT * FROM items WHERE item_id = $id" ;
+$result = mysqli_query( $connection, $q ) ;
+if ( mysqli_num_rows( $result ) == 1 )
+{
+  $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+ // If the cart already contains one of those products
+  if ( isset( $_SESSION['cart'][$id] ) )
+  { 
+    // Add another one of the products
+    $_SESSION['cart'][$id]['quantity']++; 
+    echo '<h3>Another one of those products has been added to your cart</h3>';
+  } 
+  else
+  {
+    // Add a different product
+    $_SESSION['cart'][$id]= array ( 'quantity' => 1, 'price' => $row['item_price'] ) ;
+    echo '<h3>A product has been added to your cart</h3>' ;
+  }
+}
+// Close the database connection
+mysqli_close($connection);
+// Insert links
+echo '<p><a href="products.php">Continue Shopping</a> | <a href="checkout.php">Checkout</a></p>' ;
+?>
+	
 <br class="clear-all"/>
 </div><!-- content -->
 	
@@ -79,16 +85,3 @@
 </body>
 </html>
 
-<?php
-
-if (isset($_POST["purchase"])){
-
-	echo "test two";
-}
-
-
-
-
-
-
-?>

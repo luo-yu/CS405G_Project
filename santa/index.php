@@ -10,6 +10,7 @@
 <link rel="shortcut icon" href="images/favicon.ico?v=2" type="image/x-icon" />
 </head>
 <body>
+
 <div id="wrapper">
 	<div id="maincontent">		
 	<div id="header">

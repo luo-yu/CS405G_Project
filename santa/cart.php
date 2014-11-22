@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -9,6 +13,7 @@
 <link rel="shortcut icon" href="images/favicon.ico?v=2" type="image/x-icon" />
 </head>
 <body>
+
 <div id="wrapper">
 	<div id="maincontent">
 		
@@ -18,15 +23,14 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="login.php" >Login</a> |<a href="members.php" >Our Members</a> |<a href="cart.php" class="active" >Shopping Cart</a>
+			<a href="index.php" >Log out</a> |<a href="members.php" class="active.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
 			</b>
 			<br />
 			Welcome Guest		</div>
 		<ul class="topmenu">
-		<li><a href="index.php">Home</a></li>
-		
-		<li><a href="products.php">Products</a></li>
-		
+		<li><a href="members.php">Home</a></li>
+		<li><a href="member_products.php">Products</a></li>
+	
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>
@@ -37,95 +41,69 @@
 <br/>
 	<div class="product-list">
 		<h2>Shopping Basket</h2>
-		<br/>
-		<form action="#" method="POST">
-		<table>
-			<tr>
-				<th>Item No.</th><th>Product</th><th width="40%">Name</th><th>Amount</th><th width="10%">Price</th><th width="10%">Extended</th><th>&nbsp;</th>
-			</tr>
-			<tr>
-				<td> A19000</td>
-				<td><a href="detail&id=00000019">
-					<img src="images/167_2835774.scale_20.JPG" alt=" Ambrosia Salad" width="60" height="60" />
-					</a>
-				</td>
-				<td> Play</td>
-				<td>Qty: <br /><input type="text" value="1" name="qty[]" class="s0" size="2" /></td>
-				<td align="right">    1.90</td>
-				<td align="right">    1.90</td>
-				<td>
-					<table>
-					<tr>
-						<td>Remove</td>
-						<td><input type="checkbox" name="remove[]" value="00000019" title="Remove" /></td>
-					</tr>
-					<tr>
-						<td>Update</td>
-						<td><input type="checkbox" name="update[]" value="00000019" title="Update" /></td>
-					</tr>
-					</table> 
-				</td>
-			</tr>
-			<tr>
-				<td> B59000</td>
-				<td><a href="detail&id=00000059">
-					<img src="images/430_3151480.scale_20.JPG" alt=" Boston Cream Pie" width="60" height="60" />
-					</a>
-				</td>
-				<td> Dragon</td>
-				<td>Qty: <br /><input type="text" value="2" name="qty[]" class="s0" size="2" /></td>
-				<td align="right">    5.90</td>
-				<td align="right">   11.80</td>
-				<td>
-					<table>
-					<tr>
-						<td>Remove</td>
-						<td><input type="checkbox" name="remove[]" value="00000059" title="Remove" /></td>
-					</tr>
-					<tr>
-						<td>Update</td>
-						<td><input type="checkbox" name="update[]" value="00000059" title="Update" /></td>
-					</tr>
-					</table> 
-				</td>
-			</tr>
-			<tr>
-				<td> C32000</td>
-				<td><a href="detail&id=00000032">
-					<img src="images/430_3150132.scale_20.JPG" alt=" Chocolate Fondue" width="60" height="60" />
-					</a>
-				</td>
-				<td> Bird</td>
-				<td>Qty: <br /><input type="text" value="3" name="qty[]" class="s0" size="2" /></td>
-				<td align="right">    3.20</td>
-				<td align="right">    9.60</td>
-				<td>
-					<table>
-					<tr>
-						<td>Remove</td>
-						<td><input type="checkbox" name="remove[]" value="00000032" title="Remove" /></td>
-					</tr>
-					<tr>
-						<td>Update</td>
-						<td><input type="checkbox" name="update[]" value="00000032" title="Update" /></td>
-					</tr>
-					</table> 
-				</td>
-			</tr>
-			<tr>
-				<th colspan="5">Products Total:</th>
-				<th colspan="2">   23.30</th>
-			</tr>
-		</table>
+
+
 		
-		<br/>
-		
-		<p align="center">
-			<input type="submit" name="back" value="Back to Shopping" class="button"/>
-			<input type="submit" name="change" value="Update" class="button"/>
-			<input type="submit" name="checkout" value="Checkout" class="button"/>
-		<p>
-		</form>
+<?php
+if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
+{
+// If the user changes the quantity then Update the cart
+  foreach ( $_POST['qty'] as $item_id => $item_qty )
+  {
+// Ensure that the id and the quantity are integers
+    $id = (int) $item_id;
+    $qty = (int) $item_qty;
+// If the quantity is set to zero clear the session or else store the changed quantity
+    if ( $qty == 0 ) { unset ($_SESSION['cart'][$id]); } 
+    elseif ( $qty > 0 ) { $_SESSION['cart'][$id]['quantity'] = $qty; }
+  }
+}
+// Set an initial variable for the total cost
+$total = 0; 
+
+// Display the cart contents
+if (!empty($_SESSION['cart']))
+{
+// Connect to the database.
+  require ('../includes/db_connection.php');
+// Get the items from the art table and insert them into the cart
+  $q = "SELECT * FROM items WHERE item_id IN (";
+  foreach ($_SESSION['cart'] as $id => $value) { $q .= $id . ','; }
+  $q = substr( $q, 0, -1 ) . ') ORDER BY item_id ASC';
+  
+  $result = mysqli_query ($connection, $q);
+// Create a form and a table
+  echo '<form action="cart.php" method="post">
+  <table><tr>';
+  while ($row = mysqli_fetch_array ($result, MYSQLI_ASSOC))
+  {
+// Calculate the subtotals and the grand total
+    $subtotal = $_SESSION['cart'][$row['item_id']]['quantity'] * $_SESSION['cart'][$row['item_id']]['price'];
+    $total += $subtotal;
+// Display the table
+    echo "<tr> <td>{$row['item_name']}</td><td>Product(s)</td> 
+    <td><input type=\"text\" size=\"3\" name=\"qty[{$row['item_id']}]\" value=\"{$_SESSION['cart'][$row['item_id']]['quantity']}\"></td>
+    <td>at {$row['item_price']} each </td> <td style=\"text-align:right\">".number_format ($subtotal, 2)."</td></tr>";
+  }
+// Close the database connection
+  mysqli_close($connection); 
+// Display the total
+  echo ' <tr><td colspan="5" style="text-align:right">Total = '.number_format($total,2).'</td></tr>
+  </table>
+  <input id="submit" type="submit" name="submit" value="Update My Cart"></form>';
+  
+  
+  //Prepare total for checkout page:
+  $_SESSION['checkout_total'] = $total;
+  
+  
+}
+else
+// Or display a message
+{ echo '<p>Your cart is currently empty.</p>' ; }
+// Create some links
+echo '<p><a href="member_products.php">Continue Shopping</a> | <a href="checkout.php">Checkout</a>' ;
+?>
 	</div>
 
 </div><!-- content -->

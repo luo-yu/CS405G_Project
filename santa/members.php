@@ -10,6 +10,7 @@
 <link rel="shortcut icon" href="images/favicon.ico?v=2" type="image/x-icon" />
 </head>
 <body>
+<?php include "security.php" ?>
 <div id="wrapper">
 	<div id="maincontent">
 		
@@ -19,13 +20,13 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="login.php" >Login</a> |<a href="members" class="active.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="index.php" >Log out</a> |<a href="members.php" class="active.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
 			</b>
 			<br />
 			Welcome Guest		</div>
 		<ul class="topmenu">
-		<li><a href="index.php">Home</a></li>
-		<li><a href="products.php">Products</a></li>
+		<li><a href="members.php">Home</a></li>
+		<li><a href="member_products.php">Products</a></li>
 	
 		</ul>
 		<br>

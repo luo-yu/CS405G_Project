@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -9,6 +13,7 @@
 <link rel="shortcut icon" href="images/favicon.ico?v=2" type="image/x-icon" />
 </head>
 <body>
+
 <div id="wrapper">
 	<div id="maincontent">
 		
@@ -18,15 +23,14 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="login.php" >Login</a> |<a href="members.php" >Our Members</a> |<a href="cart.php" class="active" >Shopping Cart</a>
+			<a href="index.php" >Log out</a> |<a href="members.php" class="active.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
 			</b>
 			<br />
 			Welcome Guest		</div>
 		<ul class="topmenu">
-		<li><a href="index.php">Home</a></li>
-		
-		<li><a href="products.php">Products</a></li>
-		
+		<li><a href="members.php">Home</a></li>
+		<li><a href="member_products.php">Products</a></li>
+	
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>
@@ -34,113 +38,168 @@
 	</div> <!-- header -->
 		
 	<div class="content">
-<br/>
-	<div class="product-list">
-		<h2>Shopping Basket</h2>
-		<br/>
-		<form action="#" method="POST">
-		<table>
-			<tr>
-				<th>Item No.</th><th>Product</th><th width="40%">Name</th><th>Amount</th><th width="10%">Price</th><th width="10%">Extended</th><th>&nbsp;</th>
-			</tr>
-			<tr>
-				<td> A19000</td>
-				<td><a href="detail&id=00000019">
-					<img src="images/167_2835774.scale_20.JPG" alt=" Ambrosia Salad" width="60" height="60" />
-					</a>
-				</td>
-				<td> Play</td>
-				<td>Qty: <br /><input type="text" value="1" name="qty[]" class="s0" size="2" /></td>
-				<td align="right">    1.90</td>
-				<td align="right">    1.90</td>
-				<td>
-					<table>
-					<tr>
-						<td>Remove</td>
-						<td><input type="checkbox" name="remove[]" value="00000019" title="Remove" /></td>
-					</tr>
-					<tr>
-						<td>Update</td>
-						<td><input type="checkbox" name="update[]" value="00000019" title="Update" /></td>
-					</tr>
-					</table> 
-				</td>
-			</tr>
-			<tr>
-				<td> B59000</td>
-				<td><a href="detail&id=00000059">
-					<img src="images/430_3151480.scale_20.JPG" alt=" Boston Cream Pie" width="60" height="60" />
-					</a>
-				</td>
-				<td> Dragon</td>
-				<td>Qty: <br /><input type="text" value="2" name="qty[]" class="s0" size="2" /></td>
-				<td>    5.90</td>
-				<td>   11.80</td>
-				<td>
-					<table>
-					<tr>
-						<td>Remove</td>
-						<td><input type="checkbox" name="remove[]" value="00000059" title="Remove" /></td>
-					</tr>
-					<tr>
-						<td>Update</td>
-						<td><input type="checkbox" name="update[]" value="00000059" title="Update" /></td>
-					</tr>
-					</table> 
-				</td>
-			</tr>
-			<tr>
-				<td> C32000</td>
-				<td><a href="detail&id=00000032">
-					<img src="images/430_3150132.scale_20.JPG" alt=" Chocolate Fondue" width="60" height="60" />
-					</a>
-				</td>
-				<td> Bird</td>
-				<td>Qty: <br /><input type="text" value="3" name="qty[]" class="s0" size="2" /></td>
-				<td>    3.20</td>
-				<td>    9.60</td>
-				<td>
-					<table>
-					<tr>
-						<td>Remove</td>
-						<td><input type="checkbox" name="remove[]" value="00000032" title="Remove" /></td>
-					</tr>
-					<tr>
-						<td>Update</td>
-						<td><input type="checkbox" name="update[]" value="00000032" title="Update" /></td>
-					</tr>
-					</table> 
-				</td>
-			</tr>
-			<tr>
-				<th colspan="5">Total:</th>
-				<th colspan="2">   23.30</th>
-			</tr>
-		</table>
+
+<?php
+
+
+
+//Is the user visiting the checkout page for the first time, i.e. they are coming from cart.php
+if (!( $_SERVER['REQUEST_METHOD'] == 'POST' )){	
+	//Acquire user information for the order:
+	echo "Your total is ".$_SESSION['checkout_total']."<br>";
+	echo '<form action="checkout.php" method="post" >'.'<br>';
+	echo "Please enter your email";
+	echo "<input type='text' name='email'>"."<br>";
+	echo "Please enter your billing address";
+	echo "<input type='text' name='billing_address'>"."<br>";
+	echo "Please enter your shipping address";
+	echo "<input type='text' name='shipping_address'>"."<br>";
+	echo '<input type="submit" name="make_order">'."<br>";
+	echo "</form>";
+}
+
+//Did the user already input ALL their info on checkout.php? Then report the order detials and put the info into sql, i.e. make the order:
+else if (( $_SERVER['REQUEST_METHOD'] == 'POST' )
+&& isset($_POST['make_order']) 
+&& isset($_POST['email']) && ($_POST['email'] != '')
+&& isset($_POST['billing_address']) && ($_POST['billing_address'] != '')
+&& isset($_POST['shipping_address']) && ($_POST['shipping_address'] != '')
+){
+
+	//make the order in sql:
+	
+	//report the user info back to user:
+	echo "your email : ".$_POST['email']."<br>";
+	echo "your total is :".$_SESSION['checkout_total']."<br>";
+	echo "your billing_address : ".$_POST['billing_address']."<br>";
+	echo "your shipping_address : ".$_POST['shipping_address']."<br>";
+	
+	//make db connection
+	require ('../includes/db_connection.php');
+	
+	//get price into float format:
+	$order_price = floatval($_SESSION['checkout_total'];
+	//get string value for the addresses:
+	$order_bill_addr = (string)($_POST['billing_address']);
+	$order_ship_addr = (string)($_POST['shipping_address']);
+	//the order is placed at the current time:
+	$order_date = date('Y-m-d h:i:s', (mktime(0, 0, 0, date("m")  , date("d"), date("Y"))));
+	
+	//now we are ready to create the order in sql:
+	$order_query = "INSERT into ORDER (price,date,shipping_address,billing_address) 
+					values ('$order_price','$order_date','$order_ship_addr','$order_bill_addr ')";
+	
+	$order_to_sql = mysqli_query($connection, $order_query);
+	
+	//did the query go through? then lets check and output the results:
+	if ($order_to_sql){
+		$check_order = "SELECT * 
+						FROM order
+						WHERE shipping_address = '$order_ship_addr'";
+						
+		$test = mysqli_query($connection, $check_order);
+		while ($row_test = mysqli_fetch_array($test)){
+			
+			echo "<br>"."The amount of $".$row_test['price']." will be billed to ".$row_test['billing_address']."<br>";
+			
+		}		
+	}
+	
+	//failure of query:
+	else{
+		echo "Your order has not shipped";
+	}
+}
+
+
+//error: the user did not fill out all the info, they must re-do
+else{
+	echo "Please fill out all information before submitting the order.";
+		//Acquire user information for the order:
+	echo "Your total is ".$_SESSION['checkout_total']."<br>";
+	echo '<form action="checkout.php" method="post" >'.'<br>';
+	echo "Please enter your email";
+	echo "<input type='text' name='email'>"."<br>";
+	echo "Please enter your billing address";
+	echo "<input type='text' name='billing_address'>"."<br>";
+	echo "Please enter your shipping address";
+	echo "<input type='text' name='shipping_address'>"."<br>";
+	echo '<input type="submit" name="make_order">'."<br>";
+	echo "</form>";
+}
+
+/*
+
+*/
+
+
+	//get the username
+	
+	/*PLACES*/
+	
+	
+
+	/*ORDER */
 		
-		<br/>
+	//total
+	
 		
-		<p align="center">
-			<input type="submit" name="back" value="Back to Shopping" class="button"/>
-			<!-- PayPal Buy Now Button -->
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-			<input type="hidden" name="cmd" value="_s-xclick">
-			<input type="hidden" name="hosted_button_id" value="BUTTON_ID">
-			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-			<input type="hidden" name="amount" value="23.30" />
-			<input type="hidden" name="shipping" value="2.33" />
-			<input type="hidden" name="tax" value="2.33" />
-			<input type="hidden" name="tax" value="2.33" />
-			<input type="hidden" name="return" value="thanks.php" />
-			</form>
-		<p>
-		</form>
-	</div>
+	//send username to sql	
+	
+	//sql current date
+	
+	//sql auto increment date
+	
+	//fill in billing address
+	
+	//fill in shipping address
+	
+	
+	/* CONTAINS */
+	
+	//get product(s) from last page
+	//get their quantities
+	
+	//send to sql
+
+?>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<h2>Thank you for your order. Your order number is 1906.</h2>
+
+<h3>The shopping cart has been emptied ready for your next 
+transaction.</h3>
+
+
+
+
 
 </div><!-- content -->
 	
 	</div><!-- maincontent -->
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 	<div id="footer">
 		
@@ -150,4 +209,3 @@
 
 </body>
 </html>
-

@@ -38,7 +38,7 @@ if ($numrows!=0)
 		
 		$_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
 		$_SESSION['type'] = 'manager';
-		header('Refresh: 2; URL=http://cs.uky.edu/~ylu236/santas_black_market/pages/manager.php');
+		header('Refresh: 2; URL=http://cs.uky.edu/~ylu236/santa/manager/manager.php');
 		//header("location: /SantasBlackMarket/pages/manager.php");
 		echo "Manager log in successful. Redirecting...";
 		}
@@ -48,20 +48,20 @@ if ($numrows!=0)
 		$_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
 		$_SESSION['type'] = 'staff';
 		//header('Refresh: 2; URL=http://localhost/SantasBlackMarket/pages/staff.php');
-		header("location: http://cs.uky.edu/~ylu236/santas_black_market/pages/staff.php");
+		header("location: http://cs.uky.edu/~ylu236/santa/staff/staff.php");
 		echo "Log in successful. Redirecting...";
 		}	
 		
 		//if user, then redirect to users home screen:
 		if((int)$row['user_level'] === 0){
 		$_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
-		header("location: http://cs.uky.edu/~ylu236/santas_black_market/pages/users.php");
+		header("location: http://cs.uky.edu/~ylu236/santa/members.php");
 		exit();
 		}
 	}
 	//user in our system, but entered in wrong password:
 	else{
-		header('Refresh: 5; URL=http://cs.uky.edu/~ylu236/santas_black_market/pages/loginScreen.php');
+		header('Refresh: 5; URL=http://cs.uky.edu/~ylu236/santa/login.php');
 		echo "LOG IN FAILED.  Incorrect password.  Please re-enter your email and password. Redirecting to login screen in 5 seconds...";
 	}
 } 
