@@ -68,8 +68,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $_SESSION['user_level'] = (int) $_SESSION['user_level']; // Ensure the user level is an integer
 // The login page redirects the user either to the admin page or the users search page
 // Use a ternary operation to set the URL
-$url = ($_SESSION['user_level'] === 51) ? './manager/manager.php' : 'member_products.php';
-$url = ($_SESSION['user_level'] === 22) ? './staff/staff.php' : 'member_products.php';
+if(($_SESSION['user_level'] === 51)){
+$url = './manager/manager.php';
+}
+else if($_SESSION['user_level'] === 22){
+$url = './staff/staff.php';
+}
+else{
+
+$url = 'member_products.php';
+}
+
+//$url = ($_SESSION['user_level'] === 51) ? './manager/manager.php' : 'member_products.php';
+//$url = ($_SESSION['user_level'] === 22) ? './staff/staff.php' : 'member_products.php';
 header('Location: ' . $url); // The user is directed to the appropriate page
 exit(); // Cancel the rest of the script
 	mysqli_free_result($result);
