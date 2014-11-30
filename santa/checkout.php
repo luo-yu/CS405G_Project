@@ -86,6 +86,15 @@ else if ( $_SERVER['REQUEST_METHOD'] == 'POST'
 		//get string value for the addresses:
 		$order_bill_addr = (string)($_POST['billing_address']);
 		$order_ship_addr = (string)($_POST['shipping_address']);
+		
+		
+		//get the item_id and qty from the cart.php
+		$item_id = (int)($_SESSION['item_id']);
+		$qty = (int)($_SESSION['quantity']);
+		
+		echo "item_id = ".$item_id;
+		
+		echo "qty = ".$qty;
 
 		//now we are ready to create the order in sql:
 		$order_query = "INSERT into orders (total_price,shipping_address,billing_address) 
@@ -94,7 +103,36 @@ else if ( $_SERVER['REQUEST_METHOD'] == 'POST'
 		
 		//insert the order if it hasn't already been made (flag)
 		if (!$_SESSION['flag']){
+			//$order_to_sql = mysqli_query($connection, $order_query);
+			
+			//Beginning of the transaction
+			mysqli_autocommit($connection, FALSE);
+			
 			$order_to_sql = mysqli_query($connection, $order_query);
+			
+			//Retrieve the order_id for this checkout
+			$order_id = mysqli_insert_id($connection);
+			
+			$contains_query="INSERT into contains (order_id,item_id,quantity) VALUES('$order_id','$item_id','$qty')";
+			$contains_to_sql=mysqli_query($connection, $contains_query);
+			
+			//Get user id from email submitted
+			$result = mysqli_query($connection, "SELECT user_id FROM user WHERE email = '$temp'");
+			$row = mysqli_fetch_assoc($result);
+			$user_id = (int)($row['user_id']);
+			
+			//insert into places table
+			$places_query="INSERT INTO places (user_id, order_id) VALUES ('$user_id','$order_id')";
+			$places_to_sql = mysqli_query($connection, $places_query);
+			
+			if(!mysqli_commit($connection)){
+				print("Commit failed");
+			}
+			else{
+				print("Success");
+			}
+			//end of transaction
+			
 		}
 		
 		//did the query go through? then lets check and output the results:

@@ -95,6 +95,8 @@ if (!empty($_SESSION['cart']))
   
   //Prepare total for checkout page:
   $_SESSION['checkout_total'] = $total;
+  $_SESSION['quantity']=$qty;
+  $_SESSION['item_id']=$id;
   
   
 }
