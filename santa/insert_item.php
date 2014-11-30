@@ -93,7 +93,37 @@
 	</form>
 
 
-
+<?php
+	/* If the submit (a insert) button is clicked
+	*/
+	if(isset($_POST['insert_post'])){
+		
+		/*Getting the text data from the fields*/
+		$item_name = $_POST['item_name'];
+		$item_category = $_POST['item_category'];
+		
+		$item_price = $_POST['item_price'];
+		$item_description = $_POST['item_description'];
+		
+		/*Getting the image from the field*/
+		$item_image = $_FILES['item_image']['name'];
+		$item_image_tmp=$_FILES['item_image']['tmp_name'];
+		
+		/*Upload the file to the admin_area's item_images folder*/
+		move_uploaded_file($item_image_tmp, "item_images/$item_image");
+		
+		/*Insert the new information into the database*/
+		$insert_item = "insert into items (item_name,item_category,item_price,item_description,item_image) values ('$item_name','$item_category','$item_price','$item_description','$item_image')";	
+		
+		$insert_pro=mysqli_query($connection, $insert_item);
+		
+		if($insert_pro){
+			echo "<script>alert('Item Has Been Inserted')</script>";
+			echo "<script>window.open('insert_item.php','_self')</script>";
+		}
+		
+	}
+?>
 		
 		
 		
