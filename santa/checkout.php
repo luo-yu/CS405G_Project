@@ -92,30 +92,46 @@ else if ( $_SERVER['REQUEST_METHOD'] == 'POST'
 		$item_id = (int)($_SESSION['item_id']);
 		$qty = (int)($_SESSION['quantity']);
 		
-		echo "item_id = ".$item_id;
+		
 		
 		echo "qty = ".$qty;
 
-		//now we are ready to create the order in sql:
-		$order_query = "INSERT into orders (total_price,shipping_address,billing_address) 
-						values ('$order_price','$order_ship_addr','$order_bill_addr')";
+		
 
 		
 		//insert the order if it hasn't already been made (flag)
 		if (!$_SESSION['flag']){
-			//$order_to_sql = mysqli_query($connection, $order_query);
 			
 			//Beginning of the transaction
 			mysqli_autocommit($connection, FALSE);
+			
+			//now we are ready to create the order in sql:
+			$order_query = "INSERT into orders (total_price,shipping_address,billing_address) 
+						values ('$order_price','$order_ship_addr','$order_bill_addr')";
 			
 			$order_to_sql = mysqli_query($connection, $order_query);
 			
 			//Retrieve the order_id for this checkout
 			$order_id = mysqli_insert_id($connection);
 			
-			$contains_query="INSERT into contains (order_id,item_id,quantity) VALUES('$order_id','$item_id','$qty')";
-			$contains_to_sql=mysqli_query($connection, $contains_query);
 			
+			  $q = "SELECT * FROM items WHERE item_id IN (";
+			  foreach ($_SESSION['cart'] as $id => $value) { $q .= $id . ','; }
+			  $q = substr( $q, 0, -1 ) . ') ORDER BY item_id ASC';
+  
+			$result = mysqli_query ($connection, $q);
+			
+			//Insert associated order into places table
+			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+			
+				
+				$item_id = (int)($row['item_id']);
+				$item_qty=(int)($_SESSION['cart'][$row['item_id']]['quantity']);
+				
+				echo "Item ID = ".$item_id." Quantity = ". $item_qty;
+				$query = "INSERT INTO contains ( order_id, item_id, quantity ) VALUES ($order_id, $item_id, $item_qty)";
+				$insert_to_contains = mysqli_query($connection,$query);
+			}
 			//Get user id from email submitted
 			$result = mysqli_query($connection, "SELECT user_id FROM user WHERE email = '$temp'");
 			$row = mysqli_fetch_assoc($result);
