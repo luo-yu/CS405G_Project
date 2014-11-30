@@ -27,7 +27,7 @@ echo '<h3>View Orders</h3><table border="0" width="100%" cellspacing="4" cellpad
 <tbody>';
 
 // Make the query:
-$q = 'SELECT O.order_id, O.total_price, O.order_date, O.shipping_address, O.billing_address FROM orders as O';
+$q = 'SELECT O.order_id, O.total_price, O.order_date, O.shipping_address, O.billing_address FROM orders as O WHERE O.shipped =0';
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
@@ -43,7 +43,7 @@ while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
     <td align="center">' . $row['shipping_address'] .'</td>
     <td align="center">' . $row['billing_address'] .'</td>
     
-	<td align="center"><a href="delete_record.php?action=delete&id=' . $row['order_id'] . '">Ship</a></td>
+	<td align="center"><a href="ship.php?id=' . $row['order_id'] . '">Ship</a></td>
   </tr>';
  
 }
