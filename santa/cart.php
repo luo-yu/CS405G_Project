@@ -1,9 +1,20 @@
-<?php 
+<?php
 	session_start();
+
+	//Redirect to login if user is not logged in
+	if (($_POST['checked'] == true)){
+		echo "Logged In";
+	}
+	else{
+		header("Location: http://www.cs.uky.edu/~ylu236/santa/login.php"); 
+	}
 
 ?>
 <!DOCTYPE HTML>
+
 <html>
+
+
 <head>
 <title>Santa's Black Market | Cart</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -103,8 +114,12 @@ if (!empty($_SESSION['cart']))
 else
 // Or display a message
 { echo '<p>Your cart is currently empty.</p>' ; }
+
+
 // Create some links
-echo '<p><a href="member_products.php">Continue Shopping</a> | <a href="checkout.php">Checkout</a>' ;
+
+
+	echo '<p><a href="member_products.php">Continue Shopping</a> | <a href="checkout.php">Checkout</a>';
 ?>
 	</div>
 

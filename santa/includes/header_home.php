@@ -19,13 +19,12 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="login.php" >Login</a> |<a href="members.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="login.php" >Login</a> |<a href="view_user_order.php" >View Order</a> |<a href="cart.php" >Shopping Cart</a>
 			</b>
 		</div>
 		<ul class="topmenu">
 		<li><a href="index.php">Home</a></li>
 		<li><a href="products.php">Products</a></li>
-		<li><a href="insert_item.php">Insert </a></li>		
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>

@@ -1,3 +1,12 @@
+<?php
+	session_start();
+	
+	//Redirect to login if user is not logged in
+	if (!($_POST['checked'] = true)){
+		header("Location: http://www.cs.uky.edu/~ylu236/santa/login.php"); 
+	}
+?>
+
 <!DOCTYPE HTML>
 <!-- this file has the overall look and feel of the website -->
 <html>

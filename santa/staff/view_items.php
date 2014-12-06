@@ -18,8 +18,8 @@ echo '<h3>View Orders</h3><table border="0" width="100%" cellspacing="4" cellpad
     <th align="center">Item Name</th>
 	<th align="center">Item Category</th>
 	<th align="center">Item Price</th>
-	<th align="center">Item Quantity</th>
-  
+	<th align="center">Inventory</th>
+	<th align="center">Update Inventory</th>  
   </tr></thead>
 <tbody>';
 
@@ -35,8 +35,8 @@ while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
 	<td align="center">' . $row['item_category'] .'</td>
 	
     <td align="center">$' . $row['item_price'] .'</td>
-   <td align="center">' . $row['item_quantity'] .'</td>
-    
+   <td align="center">' . $row['inventory'] .'</td>
+    <td align="center"><a href="update_inventory.php?id=' . $row['item_id'] . '">Update Inventory</a></td>
   
   </tr>';
  

@@ -36,31 +36,60 @@
 		
 	<div class="content">	
 	<br/>
-	<div class="product-list">
-		<h2>Product Details</h2>
-		<br/>
-		<div class="images">
-			<a href="#">
-				<img src="images/430_3150132.scale_20.JPG" alt=" Chocolate Angelfood Cupcakes" width="350" />
-			</a>
-		</div>
-		<div class="details">
-			<h3>SKU:  C3000</h3><br/>
-			<h1 class="name"><b> Bird</b></h1><br/>
-			<p class="desc">You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. You Know this is a bird. 
-			</p>
-			<br/>
-			<p class="view"><b>Price: £0.30</b></p><br/>
-			<form action="purchase.php" method="POST">
-			<p class="view">
-				<label>Qty:</label> <input type="text" value="1" name="qty" class="s0" size="2" />
-				<input type="submit" name="purchase" value="Buy this item" class="button"/>
-				<input type="hidden" name="price" value="0.30" />
-				<input type="hidden" name="productID" value="3" />
-			</p>
-			</form>
-		</div>
-	</div><!-- product-list -->
+
+<?php
+		
+		/* get product id selected by the customer
+		and match to the item_id in the database. Display 
+		the item_discription (which was not displayed on the home page*/	
+		if(isset($_GET['pro_id'])){
+			$product_id = $_GET['pro_id'];
+			
+			$get_pro="
+				SELECT * 
+				FROM items
+				WHERE item_id = '$product_id'";
+				
+				
+			//executing the query
+			$run_pro=mysqli_query($connection, $get_pro);
+		
+		
+		while($row_pro= mysqli_fetch_array($run_pro)){
+			$item_id = $row_pro['item_id'];
+			$item_name = $row_pro['item_name'];
+			
+			$item_price = $row_pro['item_price'];
+			$item_image = $row_pro['item_image'];
+			$item_description = $row_pro['item_description'];
+		
+			echo "
+				<div id='single_item'>
+					
+						<h3>$item_name</h3>
+						
+						<img src='item_images/$item_image' width ='400' height ='300' />
+						
+						<p><b> $$item_price </b></p>
+						
+						
+						<p>$item_description</p>
+						
+						
+						<a href='products.php' style ='float:left;'>Go Back</a>
+						
+						
+	
+						<a href='added.php?pro_id=$item_id'><button style='float:right'/>Add to Cart</a>
+				
+				</div>
+			
+			
+			";
+		}//end while
+		}//end if
+	?>
+	
 <br class="clear-all"/>
 </div><!-- content -->
 	

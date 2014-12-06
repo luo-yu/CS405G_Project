@@ -64,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// Start the session, fetch the record and insert the three values in an array
 		
 		session_start();
+		$_SESSION["checked"]=true;
+		//$_SESSION['checked']="logged";
 		$_SESSION = mysqli_fetch_array ($result, MYSQLI_ASSOC);
 $_SESSION['user_level'] = (int) $_SESSION['user_level']; // Ensure the user level is an integer
 // The login page redirects the user either to the admin page or the users search page

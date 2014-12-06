@@ -70,7 +70,7 @@
 						
 						<p><b> $$item_price </b></p>
 						
-						<a href='details.php?pro_id=$item_id' style ='float:left;'>Details</a>
+						<a href='detail.php?pro_id=$item_id' style ='float:left;'>Details</a>
 						
 						
 						<a href='index.php?pro_id=$item_id'><button style='float:right'/>Add to Cart</a>
