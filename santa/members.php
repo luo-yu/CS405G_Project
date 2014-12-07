@@ -2,7 +2,10 @@
 	session_start();
 	
 	//Redirect to login if user is not logged in
-	if (!($_POST['checked'] = true)){
+	if ( isset($_SESSION['user_level']) && ($_SESSION['user_level'] === 1)){
+		echo "Logged In";
+	}
+	else{
 		header("Location: http://www.cs.uky.edu/~ylu236/santa/login.php"); 
 	}
 ?>
@@ -25,16 +28,16 @@
 		
 	<div id="header">
 		<div id="logo" class="left">
-			<a href="index.php"><img src="images/logo.png" alt="SweetsComplete.Com"/></a>
+			<a href="member_products.php"><img src="images/logo.png" alt="SweetsComplete.Com"/></a>
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="index.php" >Log out</a> |<a href="members.php" class="active.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="logout.php" >Log out</a> |<a href="members.php" class="active.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
 			</b>
 			<br />
 			Welcome Guest		</div>
 		<ul class="topmenu">
-		<li><a href="members.php">Home</a></li>
+		<li><a href="member_products.php">Home</a></li>
 		<li><a href="member_products.php">Products</a></li>
 	
 		</ul>

@@ -19,7 +19,7 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="login.php" >Login</a> |<a href="members.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="login.php" >Login</a> 
 			</b>
 			<br />
 			Welcome Guest		</div>
@@ -76,16 +76,16 @@
 						<p>$item_description</p>
 						
 						
-						<a href='products.php' style ='float:left;'>Go Back</a>
+						<a href='".$_SERVER['HTTP_REFERER']."' products.php style ='float:left;'>Go Back</a>
 						
 						
-	
-						<a href='added.php?pro_id=$item_id'><button style='float:right'/>Add to Cart</a>
+						<a href='added.php?pro_id=$item_id'><button style='float:right'/>Add to Cart</a>  
+						
 				
 				</div>
 			
 			
-			";
+			"; 			
 		}//end while
 		}//end if
 	?>

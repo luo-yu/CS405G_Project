@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE HTML>
 <!-- this file has the overall look and feel of the website -->
 <html>
@@ -19,7 +23,7 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="login.php" class="active" >Login</a> |<a href="members.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="login.php" class="active" >Login</a> 
 			</b>
 			<br />
 			Welcome Guest		</div>
@@ -63,10 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if (@mysqli_num_rows($result) == 1) {//The user input matched the database record
 		// Start the session, fetch the record and insert the three values in an array
 		
+		
+		//$_SESSION["checked"]=true;
 		session_start();
-		$_SESSION["checked"]=true;
-		//$_SESSION['checked']="logged";
+		
 		$_SESSION = mysqli_fetch_array ($result, MYSQLI_ASSOC);
+		
+		
 $_SESSION['user_level'] = (int) $_SESSION['user_level']; // Ensure the user level is an integer
 // The login page redirects the user either to the admin page or the users search page
 // Use a ternary operation to set the URL

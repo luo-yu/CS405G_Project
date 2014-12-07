@@ -1,4 +1,5 @@
-<?php require_once("../includes/db_connection.php"); ?>
+<?php
+require_once("../includes/db_connection.php"); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -19,7 +20,7 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="login.php" >Login</a> |<a href="view_user_order.php" >View Order</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="login.php" >Log In</a>
 			</b>
 		</div>
 		<ul class="topmenu">

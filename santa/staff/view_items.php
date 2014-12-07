@@ -20,6 +20,7 @@ echo '<h3>View Orders</h3><table border="0" width="100%" cellspacing="4" cellpad
 	<th align="center">Item Price</th>
 	<th align="center">Inventory</th>
 	<th align="center">Update Inventory</th>  
+	<th align="center">Add Promotion</th>  
   </tr></thead>
 <tbody>';
 
@@ -38,6 +39,7 @@ while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
    <td align="center">' . $row['inventory'] .'</td>
     <td align="center"><a href="update_inventory.php?id=' . $row['item_id'] . '">Update Inventory</a></td>
   
+   <td align="center"><a href="promotion.php?id=' . $row['item_id'] . '">Add Promotion</a></td>
   </tr>';
  
 }

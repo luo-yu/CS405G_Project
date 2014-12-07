@@ -1,18 +1,14 @@
 <?php session_start();
+	include 'includes/member_header_home.php';
 
-	include 'includes/header_home.php';
-	
-	//echo $_GET["checked"];
-	echo $_POST["checked"];
 	//Redirect to login if user is not logged in
-	/*
-	if (($_POST['checked'] == true)){
+	if ( isset($_SESSION['user_level']) && ($_SESSION['user_level'] === 1)){
 		echo "Logged In";
 	}
 	else{
 		header("Location: http://www.cs.uky.edu/~ylu236/santa/login.php"); 
 	}
-	*/
+
 ?>
 
 <div id="rightnav">

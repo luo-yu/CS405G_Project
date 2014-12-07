@@ -44,12 +44,12 @@
 						<a href='detail.php?pro_id=$item_id'>Details</a>
 						
 						
-						<a href='added.php?pro_id=$item_id'><button/>Add to Cart</a>
+						
 				
 				</div>
 			
 			
-			";
+			";			//<a href='added.php?pro_id=$item_id'><button/>Add to Cart</a> //line 47
 	}//end while
 		
 		
