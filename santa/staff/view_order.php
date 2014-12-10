@@ -2,6 +2,17 @@
 
 // This file allows the administrator to view a single order.
 
+session_start();
+if ( isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 22)){
+	echo "Staff Logged In";
+}
+elseif(isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 51)){
+	echo "Manager Logged In";
+}
+else{
+	header("Location: http://www.cs.uky.edu/~ylu236/santa/login.php"); 
+}
+
 
 // Set the page title and include the header:
 $page_title = 'View All Orders';

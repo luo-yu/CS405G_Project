@@ -108,10 +108,39 @@
 		}//end if
 		
 	
+	
+//Product Recommendation
+echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders">
+<thead>
+	<h2 align="center"><strong>Customer Who Bought This Also Bought</strong></h2>
+  </thead>
+<tbody>';
+
+
+
+// Make the query: This query total revenue
+$q = "SELECT c2.item_id FROM contains c1 JOIN contains c2 ON c1.order_id = c2.order_id JOIN items i ON c2.item_id = i.item_id WHERE c1.item_id = $product_id AND c2.item_id !=$product_id GROUP BY c2.item_id ORDER BY COUNT(c2.item_id) DESC limit 5";
+
+$r = mysqli_query($connection, $q);
+while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
+
+	
+	echo '<tr>
+        <td align="center">' . $row['item_id'] .'</td>
+  </tr>';
+ 
+}
+echo '</tbody></table>';
+
+	
+	
 		
 	?>
 	
 <br class="clear-all"/>
+
+
+
 </div><!-- content -->
 	
 	</div><!-- maincontent -->
