@@ -4,16 +4,16 @@
 #rightnav {margin-top:15px;}
 
 #item_box{
-width: 850px;
+width: 900px;
 text-align: center;
-margin-left: 30px;
+margin-left:20px;
 margin-bottom: 10px;
 }
 
 #single_item{
 		float: left;
-		margin-left: 30px;
-		padding: 10px;
+		margin-left: 20px;
+		padding: 38px;
 	}
 	#singl_item img{
 		border: 2px solid black;
@@ -21,7 +21,7 @@ margin-bottom: 10px;
 
 #single_item h3{
 	width: 150px;
-	word-wrao:break-word;
+	word-wrap:break-word;
 }
 
 	#shopping_cart{

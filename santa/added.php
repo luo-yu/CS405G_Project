@@ -1,5 +1,17 @@
-<?php session_start() ?>
+<?php 
+	session_start();
+	//Redirect to login if user is not logged in
+	if ( isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 1)){
+		echo "Member Logged In";
+	}
+	else{
+		header("Location: http://www.cs.uky.edu/~ylu236/santa/login.php"); 
+	}
+
+?>
 <!DOCTYPE HTML>
+
+
 <html>
 <head>
 <title>Santa's Black Market | Detail</title>
@@ -20,7 +32,7 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="index.php" >Log out</a> |<a href="members.php" class="active.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="index.php" >Log out</a> |<a href="cart.php" >Shopping Cart</a>
 			</b>
 			<br />
 			Welcome Guest		</div>
@@ -38,6 +50,20 @@
 	<br/>
 
 <?php
+
+
+
+	//Redirect to login if user is not logged in
+	if ( isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 1)){
+		echo "Member Logged In";
+	}
+	else{
+		header("Location: http://www.cs.uky.edu/~ylu236/santa/login.php"); 
+	}
+
+
+
+
 //This pro_id is coming from the products.php or member_products.php, where
 //there is a line of code added.php?pro_id=$item_id
 if ( isset( $_GET['pro_id'] ) ) $id = $_GET['pro_id'] ; 
@@ -66,7 +92,10 @@ if ( mysqli_num_rows( $result ) == 1 )
 // Close the database connection
 mysqli_close($connection);
 // Insert links
-echo '<p><a href="products.php">Continue Shopping</a> | <a href="checkout.php">Checkout</a></p>' ;
+
+
+
+echo '<p><a href="member_products.php">Continue Shopping</a> | <a href="cart.php">View my Cart</a></p>' ;
 ?>
 	
 <br class="clear-all"/>

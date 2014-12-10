@@ -38,7 +38,12 @@
 	<br/>
 
 <?php
+
+		session_start();
 		
+		//First check to see if the user is logged in such that he/she can in fact add to a cart
+		
+
 		/* get product id selected by the customer
 		and match to the item_id in the database. Display 
 		the item_discription (which was not displayed on the home page*/	
@@ -75,19 +80,35 @@
 						
 						<p>$item_description</p>
 						
+						";
 						
-						<a href='".$_SERVER['HTTP_REFERER']."' products.php style ='float:left;'>Go Back</a>
+						if (isset($_SESSION['user_level']) && $_SESSION['user_level'] == 1){
 						
+						echo"
+							<a href='".$_SERVER['HTTP_REFERER']."' style ='float:left;'>Go Back</a>
 						
-						<a href='added.php?pro_id=$item_id'><button style='float:right'/>Add to Cart</a>  
+							<a href='added.php?pro_id=$item_id'><button style='float:right'/>Add to Cart</a>  
+							";
+						}
+						else{
+							echo"
+							<a href='".$_SERVER['HTTP_REFERER']."' style ='float:left;'>Go Back</a>
 						
+							<a href='login.php'><button style='float:right'/>Add to Cart</a>  
+							";
+						}
 				
-				</div>
+				
+				echo
+				"</div>";
 			
 			
-			"; 			
+			 			
 		}//end while
 		}//end if
+		
+	
+		
 	?>
 	
 <br class="clear-all"/>

@@ -29,7 +29,7 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="logout.php" >Log out</a> |<a href="members.php" class="active.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="logout.php" >Log out</a> |<a href="cart.php" >Shopping Cart</a>
 			</b>
 			<br />
 			Welcome Guest		</div>
@@ -89,6 +89,7 @@ else if ( $_SERVER['REQUEST_METHOD'] == 'POST'
 		
 		//get price into float format:
 		$order_price = (float)($_SESSION['checkout_total']);
+		echo "Price ".$order_price;
 		//get string value for the addresses:
 		$order_bill_addr = (string)($_POST['billing_address']);
 		$order_ship_addr = (string)($_POST['shipping_address']);

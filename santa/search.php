@@ -1,4 +1,6 @@
-<?php include '../includes/db_connection.php'; ?>
+<?php include '../includes/db_connection.php'; 
+
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -18,9 +20,6 @@
 			<a href="index.php"><img src="images/logo.png" alt="SweetsComplete.Com"/></a>
 		</div>
 		<div class="right marT10">
-			<b>
-			<a href="login.php" >Login</a> |<a href="members.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
-			</b>
 			<br />
 			Welcome Guest		</div>
 		<ul class="topmenu">

@@ -1,8 +1,6 @@
 <?php include 'includes/header_home.php'?>	
 
-<div id="rightnav">
 
-<div class="product-list">
 		<h2>Our Products</h2>
 		
 		<div id="item_box">
@@ -46,10 +44,9 @@
 						
 						
 				
-				</div>
-			
-			
-			";			//<a href='added.php?pro_id=$item_id'><button/>Add to Cart</a> //line 47
+				</div>";			
+
+		//<a href='added.php?pro_id=$item_id'><button/>Add to Cart</a> //line 47
 	}//end while
 		
 		
@@ -58,11 +55,8 @@
 		</div>
 		
 		
-		
-	</div><!-- product-list -->
 	
 	
-</div><!-- rightnav -->
 
 <br class="clear-all"/>
 </div><!-- content -->

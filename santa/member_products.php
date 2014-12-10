@@ -2,7 +2,7 @@
 	include 'includes/member_header_home.php';
 
 	//Redirect to login if user is not logged in
-	if ( isset($_SESSION['user_level']) && ($_SESSION['user_level'] === 1)){
+	if ( isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 1)){
 		echo "Logged In";
 	}
 	else{
@@ -10,7 +10,6 @@
 	}
 
 ?>
-
 <div id="rightnav">
 
 <div class="product-list">
@@ -55,12 +54,12 @@
 						<a href='detail.php?pro_id=$item_id'>Details</a>
 						
 						
-						<a href='added.php?pro_id=$item_id'><button/>Add to Cart</a>
+						
 				
 				</div>
 			
 			
-			";
+			";			//<a href='added.php?pro_id=$item_id'><button/>Add to Cart</a> //line 47
 	}//end while
 		
 		

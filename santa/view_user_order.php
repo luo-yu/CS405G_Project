@@ -1,4 +1,10 @@
 <?php
+session_start();
+if( isset( $_SESSION['user_id'])){
+	
+	echo "I am the user's id: ".$_SESSION['user_id'];
+}
+
 
 // This file allows the administrator to view a single order.
 

@@ -26,6 +26,8 @@ require_once("../includes/db_connection.php"); ?>
 		<ul class="topmenu">
 		<li><a href="index.php">Home</a></li>
 		<li><a href="products.php">Products</a></li>
+		<li><a href="register.php">Register</a></li>
+		<li><a href="login.php">Log In</a></li>
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>

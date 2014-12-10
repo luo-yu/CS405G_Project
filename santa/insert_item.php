@@ -79,6 +79,12 @@
 			</tr>
 			
 			<tr>
+				<td align="right"><b>Inventory:</b> </td>
+				<td><input type="text" name="inventory" required /></td>
+			</tr>
+			
+			
+			<tr>
 				<td align="right"><b>Description:</b> </td>
 				<td><textarea name="item_description" cols="20" rows="10"></textarea></td>
 			</tr>
@@ -103,6 +109,7 @@
 		$item_category = $_POST['item_category'];
 		
 		$item_price = $_POST['item_price'];
+		$item_inventory=$_POST['inventory'];
 		$item_description = $_POST['item_description'];
 		
 		/*Getting the image from the field*/
@@ -110,10 +117,10 @@
 		$item_image_tmp=$_FILES['item_image']['tmp_name'];
 		
 		/*Upload the file to the admin_area's item_images folder*/
-		move_uploaded_file($item_image_tmp, "item_images/$item_image");
+		move_uploaded_file($item_image_tmp, "http://www.cs.uky.edu/~ylu236/santa/item_images/$item_image");
 		
 		/*Insert the new information into the database*/
-		$insert_item = "insert into items (item_name,item_category,item_price,item_description,item_image) values ('$item_name','$item_category','$item_price','$item_description','$item_image')";	
+		$insert_item = "insert into items (item_name,item_category,item_price,item_description,item_image,inventory) values ('$item_name','$item_category','$item_price','$item_description','$item_image', '$item_inventory')";	
 		
 		$insert_pro=mysqli_query($connection, $insert_item);
 		

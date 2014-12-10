@@ -2,7 +2,7 @@
 	session_start();
 
 	//Redirect to login if user is not logged in
-	if ( isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 1)){
+	if ( isset($_SESSION['user_level'])){
 		echo "Logged In";
 	}
 	else{
@@ -34,7 +34,7 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="logout.php" >Log out</a> |<a href="members.php" class="active.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
+			<a href="logout.php" >Log out</a> |<a href="cart.php" >Shopping Cart</a>
 			</b>
 			<br />
 			Welcome Guest		</div>
@@ -96,10 +96,38 @@ if (!empty($_SESSION['cart']))
     <td><input type=\"text\" size=\"3\" name=\"qty[{$row['item_id']}]\" value=\"{$_SESSION['cart'][$row['item_id']]['quantity']}\"></td>
     <td>at {$row['item_price']} each </td> <td style=\"text-align:right\">".number_format ($subtotal, 2)."</td></tr>";
   }
+  
+  
+  
+  //Calculate how much promotion to reduce from the total price
+   $q = "SELECT I.item_id, P.promotion_rate, P.start_date, P.end_date FROM items AS I, promotion AS P WHERE P.end_date < NOW() I.item_id = P.item_id AND I.item_id IN (";
+  foreach ($_SESSION['cart'] as $id => $value) { $q .= $id . ','; }
+  $q = substr( $q, 0, -1 ) . ') ORDER BY I.item_id ASC';
+  
+  $result = mysqli_query ($connection, $q);
+// Create a form and a table
+  echo '<form action="cart.php" method="post">
+  <table><tr>';
+  while ($row = mysqli_fetch_array ($result, MYSQLI_ASSOC))
+  {
+	echo "Hey";
+	 $subtotal = $_SESSION['cart'][$row['item_id']]['quantity'] * $_SESSION['cart'][$row['item_id']]['price'];
+	 $subtotal = $subtotal * $row['promotion_rate'];
+	 $p += $subtotal;
+	echo "Promotion ".$p;
+	
+  }
+  
+  
+  $total = $total - $p;
+    
+  
+  
+  
 // Close the database connection
   mysqli_close($connection); 
 // Display the total
-  echo ' <tr><td colspan="5" style="text-align:right">Total = '.number_format($total,2).'</td></tr>
+  echo ' <tr><td colspan="5" style="text-align:right">Applied promotion' .number_format($p, 2).'</td><td colspan="5" style="text-align:right">Total = '.number_format($total,2).'</td></tr>
   </table>
   <input id="submit" type="submit" name="submit" value="Update My Cart"></form>';
   

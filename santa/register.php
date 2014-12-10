@@ -1,39 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>Santa's Black Market| Addmember</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name ="description" content ="Sweets Complete">
-<meta name="keywords" content="">
-<link rel="stylesheet" href="css/main.css" type="text/css">
-<link rel="shortcut icon" href="images/favicon.ico?v=2" type="image/x-icon" />
-</head>
-<body>
-<div id="wrapper">
-	<div id="maincontent">
-		
-	<div id="header">
-		<div id="logo" class="left">
-			<a href="index.php"><img src="images/logo.png" alt="SweetsComplete.Com"/></a>
-		</div>
-		<div class="right marT10">
-			<b>
-			<a href="login.php" >Login</a> |<a href="members.php" >Our Members</a> |<a href="cart.php" >Shopping Cart</a>
-			</b>
-			<br />
-			Welcome Guest		</div>
-		<ul class="topmenu">
-		<li><a href="index.php">Home</a></li>
-		<li><a href="products.php">Products</a></li>
-		</ul>
-		<br>
-		<div class="banner"><p></p></div>
-		<br class="clear"/>
-	</div> <!-- header -->
-		
-	<div class="content">
-	<br/>
-	<div class="product-list">
+<?php include 'includes/header_home.php'?>	
 		
 		
 
@@ -43,28 +8,28 @@
 		<br/>
 		
 		<b>Please enter your information.</b><br/><br/>
-	
-	<form method="post" action="./includes/register.php">
-			<p>
-				<label>Name: </label>
-				<input type="text" name="name" />
-			<p>
-			
-			<p>
-				<label>Email: </label>
-				<input type="text" name="email" />
-			<p>
-			<p>
-				<label>Password: </label>
-				<input type="text" name="password" />
-			<p>
-			
-			<p>
-				<input type="reset" name="data[clear]" value="Clear" class="button"/>
-				<input type="submit" name="submit" value="Register" class="button marL10"/>
-			<p>
-		</form>
-		
+		<div class="product-list">
+		<form method="post" action="./includes/register.php">
+				<p>
+					<label>Name:     </label>
+					<input type="text" name="name" />
+				<p>
+				
+				<p>
+					<label>Email:   </label>
+					<input type="text" name="email" />
+				<p>
+				<p>
+					<label>Password:</label>
+					<input type="text" name="password" />
+				<p>
+				
+				<p>
+					<input type="reset" name="data[clear]" value="Clear" class="button"/>
+					<input type="submit" name="submit" value="Register" class="button marL10"/>
+				<p>
+			</form>
+		</div>	
 	</div><!-- product-list -->
 </div>
 	

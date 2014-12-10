@@ -1,4 +1,16 @@
-<?php require_once("../../includes/db_connection.php"); ?>
+<?php require_once("../../includes/db_connection.php");
+
+
+	session_start();
+	//Redirect to login if user is not logged in
+	if(isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 51)){
+		echo "Manager Logged In";
+	}
+	else{
+		header("Location: http://www.cs.uky.edu/~ylu236/santa/staff/staff.php"); 
+	}
+
+ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -22,10 +34,13 @@
 			</b>
 		</div>
 		<ul class="topmenu">
-		<li><a href="staff.php">Home</a></li>
-		<li><a href="products.php">Products</a></li>
-		<li><a href="insert_item.php">Insert </a></li>	
-		<li><a href="promotion.php">Promote Item </a></li>			
+		<li><a href="staff.php">Home</a></li>	
+		<li><a href="insert_item.php">Insert</a></li>
+		<li><a href ="view_items.php">View Inventory</a></li>
+		<li><a href ="view_orders.php">View Orders</a></li>
+		<br>
+		<li><a href ="view_stats.php">Stats-Admin Only</a></li>
+		<li><a href ="promotion.php">Promote-Admin Only</a></li>
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>
