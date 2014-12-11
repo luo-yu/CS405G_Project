@@ -1,15 +1,19 @@
 <?php require_once("../../includes/db_connection.php");
 
-
 	session_start();
 	//Redirect to login if user is not logged in
 	if(isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 51)){
 		echo "Manager Logged In";
 	}
-	else{
+	elseif((isset($_SESSION['user_level'])) && ($_SESSION['user_level'] == 22)){
 		header("Location: http://www.cs.uky.edu/~ylu236/santa/staff/staff.php"); 
 	}
+	else{
+	header("Location: http://www.cs.uky.edu/~ylu236/santa/login.php"); 
+	}
 
+	
+	
  ?>
 <!DOCTYPE HTML>
 <html>
@@ -30,7 +34,7 @@
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="index.php" >Log out</a> 
+			<a href="../logout.php" >Log out</a> 
 			</b>
 		</div>
 		<ul class="topmenu">
@@ -40,7 +44,6 @@
 		<li><a href ="view_orders.php">View Orders</a></li>
 		<br>
 		<li><a href ="view_stats.php">Stats-Admin Only</a></li>
-		<li><a href ="promotion.php">Promote-Admin Only</a></li>
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>
@@ -50,30 +53,26 @@
 	<div class="content">
 		
 	
-	
-	<h2>Hello Staff Member,</h2>
+<?php	
+echo "
+	<h2>Hello Manager Member,</h2>
 	<br>
 	<h4>New promotion:</h4>
 	<br>
-	<form method="post" action='promotion.php' >
-   	 <p>Please enter item id to promote:</p>     
-   	 <input type="text" name="itemId">
-		<br>
-    	<br>
+	<form method='post' action='promotion.php?id=".$_GET['id']."' >
    	 <p>Please enter the duration in number of days of this promotion:</p>
-    	<input type="text" name="duration">
+    	<input type='text' name='duration'>
 		<br>
 		<br>
    	  <p>Please enter promotion rate:</p>
-   	 <input type="text" name="rate">
+   	 <input type='text' name='rate'>
     	<br>
    	    <br>
 
-    <input type="submit" name="submitPromotion"> 
+    <input type='submit' name='submitPromotion'> 
 	</form>
-
-	
-	
+";
+	?>
 	
 	
 	
@@ -97,7 +96,7 @@
 
 //Did the admin enter the data which is required to promote an item?
 if(isset($_POST["submitPromotion"])
-&& isset($_POST["itemId"]) && $_POST["itemId"] !=''
+//&& isset($_POST["itemId"]) && $_POST["itemId"] !=''
 && isset($_POST["duration"])&& $_POST["duration"] !=''
 && isset($_POST["rate"])&& $_POST["rate"] !=''
 ){ 
@@ -112,7 +111,9 @@ if(isset($_POST["submitPromotion"])
 	a float so that sql can recognize it as a decimal.
 	
 	*/
-	$itemId = filter_input(INPUT_POST, 'itemId', FILTER_VALIDATE_INT);
+	session_start();
+	$itemId = $_GET['id'];  //filter_input(INPUT_POST, 'itemId', FILTER_VALIDATE_INT);
+	
 	$duration = filter_input(INPUT_POST, 'duration', FILTER_VALIDATE_INT);
 	//the start date is today
 	//$startDate = mktime(0, 0, 0, date("m")  , date("d"), date("Y"));

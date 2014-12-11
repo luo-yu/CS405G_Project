@@ -41,7 +41,6 @@ else{
 		<li><a href ="view_orders.php">View Orders</a></li>
 		<br>
 		<li><a href ="view_stats.php">Stats-Admin Only</a></li>
-		<li><a href ="promotion.php">Promote-Admin Only</a></li>
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>
@@ -93,7 +92,7 @@ while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
    <td align="center">' . $row['inventory'] .'</td>
     <td align="center"><a href="update_inventory.php?id=' . $row['item_id'] . '">Update Inventory</a></td>
   
-   <td align="center"><a href="promotion.php?id=' . $row['item_id'] . '">Add Promotion</a></td>
+   <td align="center"><a href="promotion.php?id=' . $row['item_id'] . '">Add Promotion(manager only)</a></td>
   </tr>';
  
 }

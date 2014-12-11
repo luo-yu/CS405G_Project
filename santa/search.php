@@ -17,13 +17,31 @@
 		
 	<div id="header">
 		<div id="logo" class="left">
-			<a href="index.php"><img src="images/logo.png" alt="SweetsComplete.Com"/></a>
+		
+		<?php
+		session_start();
+			if (isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 1)){
+				echo "<a href='member_products.php'><img src='images/logo.png' alt='SweetsComplete.Com'/></a>";
+			}
+			else{
+				echo "<a href='index.php'><img src='images/logo.png' alt='SweetsComplete.Com'/></a>";
+			}
+		?>
 		</div>
 		<div class="right marT10">
 			<br />
 			Welcome Guest		</div>
 		<ul class="topmenu">
-		<li><a href="index.php">Home</a></li>
+		<?php
+		session_start();
+			if (isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 1)){
+				echo "<li><a href='member_products.php'>Home</a></li>";
+			}
+			else{
+				echo "<li><a href='index.php'>Home</a></li>";
+			}
+		?>
+		
 	
 		</ul>
 		<br>
@@ -71,8 +89,6 @@
 						
 						<a href='detail.php?pro_id=$item_id' style ='float:left;'>Details</a>
 						
-						
-						<a href='index.php?pro_id=$item_id'><button style='float:right'/>Add to Cart</a>
 				
 				</div>
 			

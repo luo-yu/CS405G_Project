@@ -1,5 +1,16 @@
 <?php
 
+session_start();
+//Redirect to login if user is not logged in
+if ( isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 22)){
+	echo "Staff Logged In";
+}
+elseif(isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 51)){
+	echo "Manager Logged In";
+}
+else{
+	header("Location: http://www.cs.uky.edu/~ylu236/santa/login.php"); 
+}
 
 
 $page_title = 'Add Inventory';

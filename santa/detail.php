@@ -15,18 +15,36 @@
 		
 	<div id="header">
 		<div id="logo" class="left">
-			<a href="index.php"><img src="images/logo.png" alt="SweetsComplete.Com"/></a>
+		
+		<?php
+		session_start();
+			if (isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 1)){
+				echo "<a href='member_products.php'><img src='images/logo.png' alt='SweetsComplete.Com'/></a>";
+			}
+			else{
+				echo "<a href='index.php'><img src='images/logo.png' alt='SweetsComplete.Com'/></a>";
+			}
+		?>
+		
 		</div>
 		<div class="right marT10">
 			<b>
-			<a href="login.php" >Login</a> 
 			</b>
 			<br />
-			Welcome Guest		</div>
+		</div>
 		<ul class="topmenu">
-		<li><a href="index.php">Home</a></li>
 		
-		<li><a href="products.php">Products</a></li>
+		
+		<?php
+		session_start();
+			if (isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 1)){
+				echo "<li><a href='member_products.php'>Home</a></li>";
+			}
+			else{
+				echo "<li><a href='index.php'>Home</a></li>";
+			}
+		?>
+		
 		
 		</ul>
 		<br>
@@ -108,39 +126,30 @@
 		}//end if
 		
 	
-	
 //Product Recommendation
 echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders">
 <thead>
 	<h2 align="center"><strong>Customer Who Bought This Also Bought</strong></h2>
   </thead>
 <tbody>';
-
-
-
 // Make the query: This query total revenue
-$q = "SELECT c2.item_id FROM contains c1 JOIN contains c2 ON c1.order_id = c2.order_id JOIN items i ON c2.item_id = i.item_id WHERE c1.item_id = $product_id AND c2.item_id !=$product_id GROUP BY c2.item_id ORDER BY COUNT(c2.item_id) DESC limit 5";
-
+$q = "SELECT c2.item_id, i.item_image FROM contains c1 JOIN contains c2 ON c1.order_id = c2.order_id JOIN items i ON c2.item_id = i.item_id WHERE c1.item_id = $product_id AND c2.item_id !=$product_id GROUP BY c2.item_id ORDER BY COUNT(c2.item_id) DESC limit 5";
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
 
+		$item_image1 = $row['item_image'];
+		$item_id1=$row['item_id'];
+		
+		echo "<a href='detail.php?pro_id=$item_id1'><img src='item_images/$item_image1' width ='150' height ='150' /></a>";
 	
-	echo '<tr>
-        <td align="center">' . $row['item_id'] .'</td>
-  </tr>';
+	
  
 }
 echo '</tbody></table>';
 
-	
-	
-		
 	?>
 	
 <br class="clear-all"/>
-
-
-
 </div><!-- content -->
 	
 	</div><!-- maincontent -->

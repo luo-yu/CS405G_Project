@@ -41,7 +41,6 @@ else{
 		<li><a href ="view_orders.php">View Orders</a></li>
 		<br>
 		<li><a href ="view_stats.php">Stats-Admin Only</a></li>
-		<li><a href ="promotion.php">Promote-Admin Only</a></li>
 		</ul>
 		<br>
 		<div class="banner"><p></p></div>

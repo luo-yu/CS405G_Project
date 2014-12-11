@@ -32,7 +32,7 @@ if (!mysqli_query($connection,$sql)){
 }
 //otherwise it was a successful registration, redirect to users homepage
 else{
-	header("Refresh: 3; URL=http://www.cs.uky.edu/~ylu236/santa/members.php");
+	header("Refresh: 3; URL=http://www.cs.uky.edu/~ylu236/santa/login.php");
 	echo "Registration successful. Redirecting...";
 }
 

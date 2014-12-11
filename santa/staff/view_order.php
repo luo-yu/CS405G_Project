@@ -29,7 +29,7 @@ echo '<h3>View Orders</h3><table border="0" width="100%" cellspacing="4" cellpad
     <th align="center">Order ID</th>
 	<th align="center">Item Name</th>
 	<th align="center">Quantity</th>
-    <th align="center">Total</th>
+    <th align="center">Price</th>
 
     <th align="center">Shipping Address</th>
 	<th align="center">Billing Address</th>
@@ -41,7 +41,7 @@ echo '<h3>View Orders</h3><table border="0" width="100%" cellspacing="4" cellpad
 $order_id = $_GET['id'];
 
 // Make the query:
-$q = "SELECT I.item_id, I.item_name, C.quantity, O.order_id, O.total_price,U.name,O.order_date, O.shipping_address, O.billing_address FROM user as U,  places as P, orders as O, contains as C, items as I WHERE U.user_id = P.user_id AND P.order_id = O.order_id AND C.order_id = O.order_id AND C.item_id = I.item_id AND O.order_id = $order_id";
+$q = "SELECT I.item_id, I.item_name, C.quantity, O.order_id, I.item_price,U.name,O.order_date, O.shipping_address, O.billing_address FROM user as U,  places as P, orders as O, contains as C, items as I WHERE U.user_id = P.user_id AND P.order_id = O.order_id AND C.order_id = O.order_id AND C.item_id = I.item_id AND O.order_id = $order_id";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
@@ -52,7 +52,7 @@ while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
 	<td align="center">' . $row['item_name'] .'</td>
 	<td align="center">' . $row['quantity'] .'</td>
 	
-    <td align="center">$' . $row['total_price'] .'</td>
+    <td align="center">$' . $row['item_price'] * $row['quantity'] .'</td>
    
     
     <td align="center">' . $row['shipping_address'] .'</td>

@@ -12,7 +12,7 @@ else{
 
 
 
-// This file allows the administrator to view a single order.
+// This file allows the user to view a single order.
 
 // Set the page title and include the header:
 $page_title = 'View User Orders';
@@ -29,56 +29,50 @@ echo '<h3>View Order</h3><table border="0" width="100%" cellspacing="4" cellpadd
     <th align="center">Order ID</th>
 	<th align="center">Item Name</th>
 	<th align="center">Quantity</th>
-    <th align="center">Order Total</th>
+    <th align="center">Total</th>
 
     <th align="center">Shipping Address</th>
 	<th align="center">Billing Address</th>
-	
+	<th align="center">Order Status</th>
   
   </tr></thead>
 <tbody>';
 
-
-$temp = $_SESSION['user_id'];
-//select all orders with a user_id = $_SESSION['user_id'];
-$preQuery = "SELECT order_id
-			FROM places
-			WHERE user_id = $temp";
-
-//query			
-$makePreQuery = mysqli_query($connection, $preQuery);
-
-//make array of query results, and display each order the user has 
-while($preRow = mysqli_fetch_array ($makePreQuery, MYSQLI_ASSOC)){
-	$order_id = $preRow['order_id'];
-	
+//Get user id, as it is all we need for the query 
+$userId = $_SESSION['user_id'];
 
 // Make the query:
-$q = "SELECT I.item_id, I.item_name, C.quantity, O.order_id, O.total_price,U.name,O.order_date, O.shipping_address, O.billing_address 
+$q = "SELECT I.item_id, I.item_name, C.quantity, O.order_id, I.item_price,U.name,O.order_date, O.shipping_address, O.billing_address, O.shipped 
 FROM user as U,  places as P, orders as O, contains as C, items as I 
-WHERE U.user_id = P.user_id AND P.order_id = O.order_id AND C.order_id = O.order_id AND C.item_id = I.item_id AND O.order_id = $order_id";
-
+WHERE U.user_id = P.user_id AND P.order_id = O.order_id AND C.order_id = O.order_id AND C.item_id = I.item_id AND U.user_id = $userId";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
 	echo '<tr>
-	 <td align="center"><a href="view_order.php?item_id=' . $row['item_id'] . '">' . $row['item_id'] . '</a></td>
-    <td align="center"><a href="view_order.php?order_id=' . $row['order_id'] . '">' . $row['order_id'] . '</a></td>
-	
+
+	<td align="center">' . $row['item_id'] .'</td>
+	<td align="center">' . $row['order_id'] .'</td>
 	<td align="center">' . $row['item_name'] .'</td>
 	<td align="center">' . $row['quantity'] .'</td>
 	
-    <td align="center">$' . $row['total_price'] .'</td>
+    <td align="center">$' . $row['item_price']*$row['quantity'] .'</td>
    
     
     <td align="center">' . $row['shipping_address'] .'</td>
     <td align="center">' . $row['billing_address'] .'</td>
-    
+    <td align="center">'; 
+	if ($row['shipped']){
+		echo "Shipped";
+	}
+	else{
+		echo "Pending";
+	}
+	  echo'</td>;
 	
   </tr>';
  
 }
-}
+
 echo '</tbody></table>';
 //Delete row with item_id and order id from contains table, 
 //update item quantity in items table

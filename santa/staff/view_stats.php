@@ -75,7 +75,7 @@ echo '<h3>View Statistics</h3><table border="0" width="100%" cellspacing="4" cel
 </thead>
 <tbody>';
 
-$q = "SELECT SUM(O.total_price) AS total_revenue FROM items I, contains C, orders O WHERE O.order_id = C.order_id AND C.item_id = I.item_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 WEEK)) AND   timestamp(NOW())";
+$q = "SELECT SUM(total_price) AS total_revenue FROM orders WHERE order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 WEEK)) AND timestamp(NOW())";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
@@ -100,7 +100,7 @@ echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders"
 
 
 // Make the query: This query total revenue
-$q = "SELECT SUM(O.total_price) AS total_revenue FROM items I, contains C, orders O WHERE O.order_id = C.order_id AND C.item_id = I.item_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 MONTH)) AND   timestamp(NOW())";
+$q = "SELECT SUM(total_price) AS total_revenue FROM orders WHERE order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 MONTH)) AND   timestamp(NOW())";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
@@ -124,8 +124,8 @@ echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders"
 
 
 
-// Make the query: This query total revenue for each items
-$q = "SELECT SUM(O.total_price) AS total_revenue FROM items I, contains C, orders O WHERE O.order_id = C.order_id AND C.item_id = I.item_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 YEAR)) AND   timestamp(NOW())";
+
+$q = "SELECT SUM(total_price) AS total_revenue FROM orders WHERE order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 YEAR)) AND   timestamp(NOW())";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
@@ -146,7 +146,7 @@ echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders"
 	</thead>
 <tbody>';
 
-$q = "SELECT SUM(C.quantity) AS total_quantity FROM items I, contains C, orders O WHERE O.order_id = C.order_id AND C.item_id = I.item_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 YEAR)) AND timestamp(NOW())";
+$q = "SELECT SUM(C.quantity) AS total_quantity FROM contains C, orders O WHERE O.order_id = C.order_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 YEAR)) AND timestamp(NOW())";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
@@ -167,7 +167,7 @@ echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders"
 	</thead>
 <tbody>';
 
-$q = "SELECT SUM(C.quantity) AS total_quantity FROM items I, contains C, orders O WHERE O.order_id = C.order_id AND C.item_id = I.item_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 MONTH)) AND timestamp(NOW())";
+$q = "SELECT SUM(C.quantity) AS total_quantity FROM contains C, orders O WHERE O.order_id = C.order_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 MONTH)) AND timestamp(NOW())";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
@@ -188,7 +188,7 @@ echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders"
 	</thead>
 <tbody>';
 
-$q = "SELECT SUM(C.quantity) AS total_quantity FROM items I, contains C, orders O WHERE O.order_id = C.order_id AND C.item_id = I.item_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 WEEK)) AND timestamp(NOW())";
+$q = "SELECT SUM(C.quantity) AS total_quantity FROM contains C, orders O WHERE O.order_id = C.order_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 WEEK)) AND timestamp(NOW())";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
@@ -200,6 +200,11 @@ while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
 }
 
 echo '</tbody></table>';
+
+
+
+
+
 
 
 //Display total quantity sold for each item during last week
@@ -215,7 +220,7 @@ echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders"
 	</thead>
 <tbody>';
 
-$q = "SELECT I.item_id, I.item_name, SUM(C.quantity) AS total_quantity FROM items I, contains C, orders O WHERE O.order_id = C.order_id AND C.item_id = I.item_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 WEEK)) AND timestamp(NOW()) GROUP BY I.item_id";
+$q = "SELECT C.item_id, I.item_name, SUM(C.quantity) AS total_quantity FROM contains C, orders O, items I WHERE O.order_id = C.order_id AND I.item_id = C.item_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 WEEK)) AND timestamp(NOW()) GROUP BY C.item_id";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
@@ -237,7 +242,7 @@ echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders"
 	<tr>
 		<td align="center"><strong>Item ID</strong></td>
 		<td align="center"><strong>Item Name</strong></td>
-		<td align="center"><strong>Total Number of items sold Last Week</strong></td>
+		<td align="center"><strong>Total Number of items sold Last Month</strong></td>
 	
 	</tr>
 	</thead>
@@ -266,7 +271,7 @@ echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders"
 	<tr>
 		<td align="center"><strong>Item ID</strong></td>
 		<td align="center"><strong>Item Name</strong></td>
-		<td align="center"><strong>Total Number of items sold Last Week</strong></td>
+		<td align="center"><strong>Total Number of items sold Last Year</strong></td>
 	
 	</tr>
 	</thead>
@@ -292,22 +297,24 @@ echo '</tbody></table>';
 //Display this year's top popular item
 echo '<table border="0" width="100%" cellspacing="4" cellpadding="4" id="orders">
 <thead>
-	<h2 align="center"><strong>Last Year\'s Most Popular Items/strong></h2>
+	<h2 align="center"><strong>Last Year\'s Most Popular Items</strong></h2>
 	<tr>
 		<td align="center"><strong>Item ID</strong></td>
+		<td align="center"><strong>Item Name</strong></td>
 		<td align="center"><strong>Quantity Sold Last Year</strong></td>
 	
 	</tr>
 	</thead>
 <tbody>';
 
-$q = "select distinct item_id, quantity from contains where quantity = (select MAX(quantity) from contains)";
+$q = "SELECT II.item_id, II.item_name, II.total_quantity FROM (SELECT I.item_id, I.item_name, SUM(C.quantity) AS total_quantity FROM items I, contains C, orders O WHERE O.order_id = C.order_id AND C.item_id = I.item_id AND order_date BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 1 YEAR)) AND timestamp(NOW()) GROUP BY I.item_id) AS II WHERE II.total_quantity=(SELECT MAX(m.total) FROM (SELECT SUM(c1.quantity) AS total FROM contains c1, items i1 WHERE c1.item_id = i1.item_id GROUP BY c1.item_id) AS m)";
 
 $r = mysqli_query($connection, $q);
 while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC)) {
 	echo '<tr>
 		<td align="center">' . $row['item_id'] .'</td>
-        <td align="center">' . $row['quantity'] .'</td>
+		<td align="center">' . $row['item_name'] .'</td>
+        <td align="center">' . $row['total_quantity'] .'</td>
   </tr>';
  
 }
